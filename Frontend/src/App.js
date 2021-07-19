@@ -1,31 +1,25 @@
 import React from 'react';
 import './App.css';
-import { Navbar, Container, Form, Button } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./pages/Header";
+import Home from "./pages/Home";
+import CreatePost from "./pages/CreatePost";
 
 function App() {
   return (
     <div className="App">
-      <Navbar expand="lg" variant="light" bg="light">
-        <Container>
-          <Navbar.Brand href="#">Groupomania</Navbar.Brand>
-        </Container>
-      </Navbar>
-      <Form style={{ width: '500px' }}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Adresse Mail : </Form.Label>
-          <Form.Control type="email" placeholder="Entrez votre adresse mail" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Mot de passe : </Form.Label>
-          <Form.Control type="password" placeholder="Entrez votre mot de passe" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+      
+      <Router>
+      <Header/>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/CreatePost" exact component={CreatePost} />
+        </Switch>
+      </Router>   
+      
     </div>
   );
 }
-
 export default App;
+
