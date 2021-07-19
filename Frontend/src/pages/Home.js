@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "axios"; // Facilite les requêtes API
 import { useEffect, useState } from "react";
 
 
@@ -19,9 +19,9 @@ function Home() {
             {listOfPosts.map((value, key) => { 
                 return (
                    <div className="post">
-                   <div className="title"> {value.postTitle} </div>
-                   <div className="content"> {value.postContent} </div>
-                   <div className="url"> {value.postURL} </div>
+                   <div className="title"> {value.title} </div>
+                   <div className="content"> {value.content} </div>
+                   <div className="url"> {value.url} </div>
                    <div className="username"> {value.username} </div>
                   </div> 
                 );

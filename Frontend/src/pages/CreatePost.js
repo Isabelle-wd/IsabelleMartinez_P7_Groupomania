@@ -1,6 +1,6 @@
 import React from "react";
 import {Form} from "react-bootstrap";
-import {Formik, ErrorMessage } from "formik"; // Validation des formulaires
+import {Formik } from "formik"; // Validation des formulaires
 import * as Yup from "yup";
 import axios from "axios";
 
@@ -8,18 +8,23 @@ function createPost() {
     const initialValues = {
         title:"",
         content:"",
-        url:"",
+        url: null,
         username: "",
     };
 
     const validationSchema = Yup.object().shape({
-        postTitle:Yup.string(),
-        postContent:Yup.string().required(),
+        title: Yup.string(),
+        content: Yup.string().required(),
         username: Yup.string().min(3).max(25).required(),
+        url: Yup.mixed()
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        axios.post("http://localhost:3001/posts", data)
+            .then((response) => {
+                console.log(response)
+            })
+        
     };
 
     return ( 
@@ -28,62 +33,61 @@ function createPost() {
                 initialValues={initialValues} 
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}>
-                    <Form>
+            {({
+                handleChange,
+                errors,
+            }) => (
+                <Form>
                     <Form.Group className="position-relative mb-3">
                        <Form.Label> Titre : </Form.Label>
+                       
                             <Form.Control
                                 autocomplete="off"
                                 id="inputCreatePost"
                                 name="title"
                                 placeholder="(ex. titre)"
+                                onChange={handleChange}
                             />
-                            </Form.Group>
+                    </Form.Group>
 
-<Form.Group className="position-relative mb-3">    
+                    <Form.Group className="position-relative mb-3">    
                         <Form.Label> Publication : </Form.Label>
+                       
                             <Form.Control
                                 autocomplete="off"
                                 id="inputCreatePost"
                                 name="content"
                                 placeholder="(ex. publication)"
+                                onChange={handleChange}
                             />
-                            </Form.Group>
-                            <Form.Group className="position-relative mb-3">
+                    </Form.Group>
+                    <Form.Group className="position-relative mb-3">
                         <Form.Label> Identifiant : </Form.Label>
+                        
                             <Form.Control
                                 autocomplete="off"
                                 id="inputCreatePost"
                                 name="username"
                                 placeholder="(ex. Isabelle123)"
+                                onChange={handleChange}
                             />    
-                            </Form.Group>
-                        <Form.Group className="position-relative mb-3">
+                    </Form.Group>
+                    <Form.Group className="position-relative mb-3">
                             <Form.Label>Photo/Vidéo : </Form.Label>
                                 <Form.Control
                                   type="file"
-                                  required
-                                  name="file"
-                                  //onChange={handleChange}
-                                  //isInvalid={!!errors.file}
-                                />
-                                <Form.Control.Feedback type="invalid" tooltip>{}</Form.Control.Feedback>    
-                        </Form.Group>
-                        <Form.Group className="position-relative mb-3">
-                          <Form.Check
-                            required
-                            name="url"
-                            label="Agree to terms and conditions"
-                            // onChange={handleChange}
-                            //isInvalid={!!errors.terms}
-                            //feedback={errors.terms}
-                            id="validationFormik106"
-                            feedbackTooltip
-                          />
-                        </Form.Group>
+                                  name="url"
+                                  onChange={handleChange}
+                                  isInvalid={!!errors.file}
+                                />   
+                    </Form.Group>
+                    
                         
-                        <button type="submit"> Publier </button>
-                    </Form>
+                    <button type="submit"> Publier </button>
+                </Form>
+      )}
             </Formik>
+      
         </div>
     )
 }
