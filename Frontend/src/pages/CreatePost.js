@@ -1,11 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Form} from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import {Formik } from "formik"; 
 import * as Yup from "yup"; // Validation des formulaires
 import axios from "axios";
 
-function createPost() {
+function CreatePost() {
+    let history = useHistory(); // Retour à la page d'accueil une fois la publication validée
     const initialValues = {
         title:"",
         content:"",
@@ -23,10 +25,13 @@ function createPost() {
     const onSubmit = (data) => {
         axios.post("http://localhost:3001/posts", data)
             .then((response) => {
-                console.log(response)
+                history.push("/");
             });
         
     };
+
+    
+
 
     return ( 
         <div className="createPostPage">
@@ -94,4 +99,4 @@ function createPost() {
     );
 }
 
-export default createPost;
+export default CreatePost;
