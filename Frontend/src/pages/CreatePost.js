@@ -1,7 +1,8 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {Form} from "react-bootstrap";
-import {Formik } from "formik"; // Validation des formulaires
-import * as Yup from "yup";
+import {Formik } from "formik"; 
+import * as Yup from "yup"; // Validation des formulaires
 import axios from "axios";
 
 function createPost() {
@@ -13,17 +14,17 @@ function createPost() {
     };
 
     const validationSchema = Yup.object().shape({
-        title: Yup.string(),
+        title: Yup.string().required("N'oubliez pas de mettre un titre à votre publication!!"),
         content: Yup.string().required(),
+        url: Yup.mixed(),
         username: Yup.string().min(3).max(25).required(),
-        url: Yup.mixed()
     });
 
     const onSubmit = (data) => {
         axios.post("http://localhost:3001/posts", data)
             .then((response) => {
                 console.log(response)
-            })
+            });
         
     };
 
@@ -34,51 +35,52 @@ function createPost() {
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}>
             {({
-                handleChange,
-                errors,
+                handleSubmit, handleChange, values, touched, errors
             }) => (
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group className="position-relative mb-3">
-                       <Form.Label> Titre : </Form.Label>
-                       
+                       <Form.Label> Titre  </Form.Label>                     
                             <Form.Control
-                                autocomplete="off"
                                 id="inputCreatePost"
                                 name="title"
                                 placeholder="(ex. titre)"
                                 onChange={handleChange}
+                                isInvalid={!!errors.title}
                             />
                     </Form.Group>
 
                     <Form.Group className="position-relative mb-3">    
-                        <Form.Label> Publication : </Form.Label>
-                       
+                        <Form.Label> Quoi de neuf ? </Form.Label>                      
                             <Form.Control
-                                autocomplete="off"
+                                as="textarea"
                                 id="inputCreatePost"
                                 name="content"
-                                placeholder="(ex. publication)"
+                                placeholder="Le contenu de votre publication ..."
                                 onChange={handleChange}
+                                isInvalid={!!errors.content}
                             />
                     </Form.Group>
+
                     <Form.Group className="position-relative mb-3">
-                        <Form.Label> Identifiant : </Form.Label>
-                        
+                        <Form.Label> Identifiant : </Form.Label>                        
                             <Form.Control
-                                autocomplete="off"
                                 id="inputCreatePost"
                                 name="username"
                                 placeholder="(ex. Isabelle123)"
+                                value={values.username}
                                 onChange={handleChange}
+                                isInvalid={!!errors.username}
                             />    
                     </Form.Group>
+                    
                     <Form.Group className="position-relative mb-3">
-                            <Form.Label>Photo/Vidéo : </Form.Label>
+                            <Form.Label>Photo/Vidéo  </Form.Label>
                                 <Form.Control
+                                  id="inputCreatePost"
                                   type="file"
                                   name="url"
                                   onChange={handleChange}
-                                  isInvalid={!!errors.file}
+                                  isInvalid={!!errors.url}
                                 />   
                     </Form.Group>
                     
@@ -89,7 +91,7 @@ function createPost() {
             </Formik>
       
         </div>
-    )
+    );
 }
 
 export default createPost;

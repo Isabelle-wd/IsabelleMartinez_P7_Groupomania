@@ -1,31 +1,42 @@
 import React from "react";
+import {Card, Container} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios"; // Facilite les requêtes API
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 
 function Home() {
 
     const [listOfPosts, setListOfPosts] = useState([]);
+    let history = useHistory()
 
     useEffect(() => {
         axios.get("http://localhost:3001/posts")
             .then((response) => {setListOfPosts(response.data)
-            /* .catch((error) => ("erreur")) */;
         });
     }, []);
 
     return (
         <div className="">
-            {listOfPosts.map((value, key) => { 
-                return (
-                   <div className="post">
-                   <div className="title"> {value.title} </div>
-                   <div className="content"> {value.content} </div>
-                   <div className="url"> {value.url} </div>
-                   <div className="username"> {value.username} </div>
-                  </div> 
-                );
-            })}
+            {listOfPosts.map((value, key) => {
+        return (
+          
+          <Container className="position-relative post" onClick={() => {history.push(`/post/${value.id}`)}}>
+            <Card className="mb-3" style={{ width: '600px' }}>     
+              <Card.Header className="text-center" as="h6">{value.title}</Card.Header>     
+              <Card.Body>
+                <Card.Img variant="top" src={value.url} />
+                <Card.Text>{value.content}</Card.Text>
+                <cite title="username">{value.username}</cite>
+              </Card.Body>
+              <Card.Footer className="text-muted">
+                <Card.Link href="#">Commenter</Card.Link>
+              </Card.Footer>             
+            </Card>
+          </Container>
+        );
+    })}      
         </div>
     )
 }

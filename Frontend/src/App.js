@@ -1,52 +1,38 @@
-import React from 'react';
-import {Card, Container} from "react-bootstrap";
 import './App.css';
-//import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./pages/Header";
-//import Home from "./pages/Home";
-//import CreatePost from "./pages/CreatePost";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {Navbar, Nav, Container} from "react-bootstrap";
+import Home from "./pages/Home";
+import CreatePost from "./pages/CreatePost";
+import Post from "./pages/Post";
 
-import { useState, useEffect } from "react";
-import axios from "axios";
 
 function App() {
-  const [listOfPosts, setListOfPosts] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3001/posts").then((response) => {
-      setListOfPosts(response.data);
-    });
-  }, []);
+  
   return (
-    <div className="App"> 
-      {listOfPosts.map((value, key) => {
-        return (
-          
-          <Container className="position-relative">
-            <Card className="mb-3" style={{ width: '500px' }}>     
-              <Card.Header className="text-center" as="h6">{value.title}</Card.Header>     
-              <Card.Body>
-                <Card.Img variant="top" src={value.url} />
-                <Card.Text>{value.content}</Card.Text>
-                <cite title="username">{value.username}</cite>
-              </Card.Body>
-              <Card.Footer className="text-muted">
-                <Card.Link href="#">Commenter</Card.Link>
-              </Card.Footer>             
-            </Card>
+    <div className="App">
+      <Router>
+        <Navbar sticky="top" bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand href="/">Groupomania</Navbar.Brand>
+              <Nav className="me-auto">
+                <Nav.Link href="/">Publications</Nav.Link>
+                <Nav.Link href="/CreatePost">Créer une publication</Nav.Link>
+              </Nav>
           </Container>
+        </Navbar>
+        <br />
 
-          
-        );
-
-
-    })}
+        <Switch>
+          <Route path="/" exact component={Home}/>
+          <Route path="/CreatePost" exact component={CreatePost}/>
+          <Route path="/Post/:id" exact component={Post}/>
+        </Switch> 
+      </Router>
       
      
       
     </div>
-  )
+  );
 }
 export default App;
 
