@@ -27,9 +27,10 @@ function Post() {
         comments: newComment, 
         PostId: id})
         .then((response) => {
-        console.log("commentaire ajouté");
-      })
-    }
+          const commentToAdd = { comments: newComment};
+          setComments([...comments, commentToAdd]);
+      });
+    };
 
     return (
       <div className="postPage">
@@ -54,24 +55,19 @@ function Post() {
             </form>
           </div>
 
-      
-
-            <div className="listOfComments">
-              {comments.map((comment, key) => {
-                return (
-                  <Card className="mt-3" style={{ width: "600px" }}>
-                  <Card.Body>
-                    <Card.Title>username</Card.Title>
-                    
-                    <Card.Text key={key} className="comment"> {comment.comments}</Card.Text>
-                      
-                    
-                    <Card.Link href="#">Card Link</Card.Link>
-                  </Card.Body>
-                  </Card>
-                )
-              })}
-            </div>      
+          <div className="listOfComments">
+            {comments.map((comment, key) => {
+              return (
+                <Card className="mt-3" style={{ width: "600px" }}>
+                <Card.Body>
+                  <Card.Title>username</Card.Title>
+                  <Card.Text key={key} className="comment"> {comment.comments}</Card.Text>  
+                  <Card.Link href="#">Card Link</Card.Link>
+                </Card.Body>
+                </Card>
+              )
+            })}
+          </div>      
       </div>
 
         
