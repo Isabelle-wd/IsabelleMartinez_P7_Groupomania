@@ -40,7 +40,7 @@ function CreatePost() {
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}>
             {({
-                handleSubmit, handleChange, values, touched, errors
+                handleSubmit, handleChange, values, errors
             }) => (
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="position-relative mb-3">
