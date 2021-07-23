@@ -1,62 +1,45 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {Form, InputGroup, Button} from "react-bootstrap";
-import {Formik} from "formik"; 
-import * as Yup from "yup"; // Validation des formulaires
+import React, { useState } from "react";
+import {Form, Button} from "react-bootstrap";
+import axios from "axios";
 
 function Login() {
-    const initialValues = {
-        username: "",
-        password: "",
-    };
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    const validationSchema = Yup.object().shape({
-        username: Yup.string().min(3).max(25).required(),
-        password: Yup.string().min().max(20).required(), 
+  const Login = () => {
+    const data = { 
+        username: username, 
+        password: password };
+    axios.post("http://localhost:3001/auth/login", data)
+        .then((response) => {
+        console.log(response.data);
     });
-    return (
-        <div className="login">
-            <Formik 
-                initialValues={initialValues} 
-                
-                validationSchema={validationSchema}>
-            {({
-                handleSubmit, handleChange, values, errors
-            }) => (
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <InputGroup hasValidation>
-                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Username"
-                  aria-describedby="inputGroupPrepend"
-                  name="username"
-                  value={values.username}
-                  onChange={handleChange}
-                  isInvalid={!!errors.username}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.username}
-                </Form.Control.Feedback>
-              </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                    </Form.Group>
-                    
-                    <Button variant="primary" type="submit">
-                      Submit
-                    </Button>
-                </Form>
-            )}
-                </Formik>
-        </div>
-    )
+  };
+  return (
+    <div className="loginContainer">
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label> VOtre identifiant</Form.Label>
+            <Form.Control 
+                type="text"
+                onChange={(event) => {
+                setUsername(event.target.value);
+              }} 
+            />
+          </Form.Group>         
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+                type="password" 
+                onChange={(event) => {
+                    setPassword(event.target.value);
+                  }} />
+          </Form.Group>            
+          <Button variant="primary" type="submit">
+            Je me connecte
+          </Button>
+        </Form>
+    </div>
+  );
 }
-
-export default Login
- 
+export default Login;

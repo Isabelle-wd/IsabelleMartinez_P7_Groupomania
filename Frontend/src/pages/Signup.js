@@ -1,9 +1,86 @@
-import React from 'react'
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Form, Button} from "react-bootstrap";
+import {Formik} from "formik"; 
+import * as Yup from "yup"; // Validation des formulaires
+import axios from "axios";
 
 function Signup() {
+    const initialValues = {
+        email: "",
+        username: "",
+        password: "",
+    };
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().email("adresse email non valide").required(),
+        username: Yup.string().min(3).max(25).required(),
+        password: Yup.string().matches(
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            "Le MDP doit contenir 8 caractères minimum dont une majuscule, une minuscule, un chiffre et un caractère spécial"
+          ).required(), 
+    });
+
+    const onSubmit = (data) => {
+        axios.post("http://localhost:3001/auth", data)
+        .then(() => {
+          console.log(data);
+        });
+      };
+
     return (
-        <div>
-            signup
+        <div className="signup">
+            <Formik 
+                initialValues={initialValues} 
+                onSubmit={onSubmit}
+                validationSchema={validationSchema}>
+            {({
+                handleSubmit, handleChange, values, errors
+            }) => (
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Adresse email</Form.Label>
+                            <Form.Control 
+                                type="email" 
+                                placeholder="Entrez votre adresse mail Groupomania" 
+                                name="email" 
+                                id="inputCreatePost"
+                                value={values.email} 
+                                onChange={handleChange}
+                                isInvalid={!!errors.email}
+                            />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicUsername">
+                        <Form.Label>Identifiant</Form.Label>                        
+                            <Form.Control
+                                type="text"
+                                placeholder="Choisissez un pseudo"
+                                name="username"
+                                id="inputCreatePost"
+                                value={values.username}
+                                onChange={handleChange}
+                                isInvalid={!!errors.username}
+                            />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Mot de passe</Form.Label>
+                            <Form.Control 
+                                type="password"
+                                placeholder="Le MDP doit contenir 8 caractères minimum dont une majuscule, une minuscule, un chiffre et un caractère spécial"
+                                name="password"
+                                id="inputCreatePost"
+                                value={values.password}
+                                onChange={handleChange}
+                                isInvalid={!!errors.password}/>
+                    </Form.Group>
+                    
+                    <Button variant="primary" type="submit">S'enregistrer</Button>
+                                
+                              
+                </Form>
+            )}
+            </Formik>
         </div>
     )
 }
