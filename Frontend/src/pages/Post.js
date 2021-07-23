@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Container, Form, Button, Image} from "react-bootstrap";
+import {Card, Container, Form, Button} from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios"; // Facilite les requêtes API
@@ -25,11 +25,20 @@ function Post() {
     const addComment = () => {
       axios.post("http://localhost:3001/comments", {
         comments: newComment, 
-        PostId: id})
+        PostId: id
+      })
+
+
         .then((response) => {
-          const commentToAdd = { comments: newComment};
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+          const commentToAdd = { 
+            comments: newComment,
+          };
           setComments([...comments, commentToAdd]);
-      });
+        }
+        });
     };
 
     return (

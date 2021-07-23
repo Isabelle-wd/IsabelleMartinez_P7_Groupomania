@@ -1,8 +1,7 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import {Form, Button} from "react-bootstrap";
-import {Formik} from "formik"; 
-import * as Yup from "yup"; // Validation des formulaires
+import {Formik} from "formik"; // Validation des formulaires
+import * as Yup from "yup"; // Validation des données du formulaire
 import axios from "axios";
 
 function Signup() {
@@ -37,8 +36,8 @@ function Signup() {
             {({
                 handleSubmit, handleChange, values, errors
             }) => (
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form className="ms-3" onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Email">
                         <Form.Label>Adresse email</Form.Label>
                             <Form.Control 
                                 type="email" 
@@ -50,7 +49,7 @@ function Signup() {
                                 isInvalid={!!errors.email}
                             />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicUsername">
+                    <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Username">
                         <Form.Label>Identifiant</Form.Label>                        
                             <Form.Control
                                 type="text"
@@ -63,7 +62,7 @@ function Signup() {
                             />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Password">
                         <Form.Label>Mot de passe</Form.Label>
                             <Form.Control 
                                 type="password"
@@ -75,7 +74,7 @@ function Signup() {
                                 isInvalid={!!errors.password}/>
                     </Form.Group>
                     
-                    <Button variant="primary" type="submit">S'enregistrer</Button>
+                    <Button block type="submit">Je m'enregistre</Button>
                                 
                               
                 </Form>
