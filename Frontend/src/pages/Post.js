@@ -20,6 +20,7 @@ function Post() {
           .then((response) => {
             setComments(response.data);
         });    
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const addComment = () => {
