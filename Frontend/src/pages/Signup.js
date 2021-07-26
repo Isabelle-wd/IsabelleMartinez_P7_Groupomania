@@ -43,7 +43,6 @@ function Signup() {
                                 type="email" 
                                 placeholder="Entrez votre adresse mail Groupomania" 
                                 name="email" 
-                                id="inputCreatePost"
                                 value={values.email} 
                                 onChange={handleChange}
                                 isInvalid={!!errors.email}
@@ -55,7 +54,6 @@ function Signup() {
                                 type="text"
                                 placeholder="Choisissez un pseudo"
                                 name="username"
-                                id="inputCreatePost"
                                 value={values.username}
                                 onChange={handleChange}
                                 isInvalid={!!errors.username}
@@ -68,7 +66,6 @@ function Signup() {
                                 type="password"
                                 placeholder="Le MDP doit contenir 8 caractères minimum dont une majuscule, une minuscule, un chiffre et un caractère spécial"
                                 name="password"
-                                id="inputCreatePost"
                                 value={values.password}
                                 onChange={handleChange}
                                 isInvalid={!!errors.password}/>
