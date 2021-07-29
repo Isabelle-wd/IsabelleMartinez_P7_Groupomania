@@ -2,21 +2,30 @@ const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require ("bcrypt");
-require("dotenv").config();
+
 const { validateToken } = require("../middleware/auth");
 const { sign } = require("jsonwebtoken");
 
+require("dotenv").config();
+
+
 // Inscription 
 router.post("/", async (req, res) => {
-  const {email, password} = req.body;
-  bcrypt.hash(password, 10)
-    .then ((hash) => {
-        Users.create({
-            email: email, 
-            password: hash,
-        });
-        res.json("bravo!");
-    });  
+    try {
+        const { email, username, password } = req.body;
+            bcrypt
+                .hash(password, 10)
+                .then ((hash) => {
+                    Users.create ({
+                        email: email,
+                        username: username,
+                        password: hash,
+                    });
+        res.json("SUCCESS");
+    })}
+    catch (error) {
+        throw error;
+      }
 });
 
 // Connexion
