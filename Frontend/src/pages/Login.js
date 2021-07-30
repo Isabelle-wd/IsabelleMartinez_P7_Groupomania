@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Form, Button} from "react-bootstrap";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,8 @@ function Login() {
     event.preventDefault();
   }
 
+  let history = useHistory();
+
   const login = () => {
     const data = { 
         email: email, 
@@ -22,12 +25,7 @@ function Login() {
 
     axios.post("http://localhost:3001/auth/login", data)
         .then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-            sessionStorage.setItem("accessToken", response.data);
-        }
-        
+        history.push("/");
     });
   };
 

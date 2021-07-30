@@ -2,10 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require ("bcrypt");
-
-const { validateToken } = require("../middleware/auth");
 const { sign } = require("jsonwebtoken");
-
+const auth = require("../middleware/auth")
 require("dotenv").config();
 
 
@@ -25,11 +23,12 @@ router.post("/", async (req, res) => {
     })}
     catch (error) {
         throw error;
-      }
+      };
 });
 
 // Connexion
 router.post("/login", async (req, res) => {
+    try{
     const {email, password} = req.body;
 
     const user = await Users.findOne({
@@ -49,11 +48,17 @@ router.post("/login", async (req, res) => {
             process.env.TOKEN,
             {expiresIn: "1h"}
         );        
-        res.json({ token: accessToken, email: email, id: user.id });
-    });  
+        res.json({ 
+            token: accessToken, 
+            email: email, 
+            id: user.id });
+    })}
+    catch (error) {
+        throw error;
+      };
 }); 
     
-router.get("/auth", validateToken, (req, res) => {
+router.get("/auth", auth, (req, res) => {
     res.json(req.user);
 });
 

@@ -44,7 +44,6 @@ function Post() {
 
     return (
       <div className="postPage">
-
           <Container>
             <Card className="mb-3" style={{ width: "600px" }}>    
               <Card.Img variant="top" src={postObject.url} /> 
