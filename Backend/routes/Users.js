@@ -3,7 +3,7 @@ const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require ("bcrypt");
 const { sign } = require("jsonwebtoken");
-const auth = require("../middleware/auth")
+//const auth = require("../middleware/auth")
 require("dotenv").config();
 
 
@@ -11,31 +11,28 @@ require("dotenv").config();
 router.post("/", async (req, res) => {
     try {
         const { email, username, password } = req.body;
-            bcrypt
-                .hash(password, 10)
-                .then ((hash) => {
-                    Users.create ({
-                        email: email,
-                        username: username,
-                        password: hash,
-                    });
+        let hash = await bcrypt.hash(password, 10);
+        Users.create ({
+            email: email,
+            username: username,
+            password: hash,
+        });
         res.json("SUCCESS");
-    })}
-    catch (error) {
-        throw error;
-      };
+    } catch (error) { 
+        res.status(500).send()
+        console.error(error);
+    };
 });
 
 // Connexion
 router.post("/login", async (req, res) => {
     try{
-    const {email, password} = req.body;
+        const {email, password} = req.body;
+        const user = await Users.findOne({
+            where: {email: email}
+        });
 
-    const user = await Users.findOne({
-        where: {email: email}
-    });
-
-    if (!user) res.json({ error: "identifiant inconnu!"});
+    if (!user) res.json({ error: "Identifiant inconnu!"});
 
     bcrypt.compare(password, user.password)
     .then(async (match) => {
@@ -46,19 +43,21 @@ router.post("/login", async (req, res) => {
             email: user.email, 
             id: user.id},
             process.env.TOKEN,
-            {expiresIn: "1h"}
+            {expiresIn: "24h"}
         );        
         res.json({ 
+            auth: true, 
             token: accessToken, 
             email: email, 
             id: user.id });
     })}
-    catch (error) {
-        throw error;
+    catch (error) { 
+        res.status(500).send()
+        console.error(error);
       };
 }); 
     
-router.get("/auth", auth, (req, res) => {
+router.get("/auth", (req, res) => {
     res.json(req.user);
 });
 

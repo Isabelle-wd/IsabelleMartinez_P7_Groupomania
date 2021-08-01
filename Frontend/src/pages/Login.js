@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {Form, Button} from "react-bootstrap";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+// import { AuthContext } from "../helpers/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,18 +16,32 @@ function Login() {
     event.preventDefault();
   }
 
-  let history = useHistory();
+//  let history = useHistory();
 
   const login = () => {
     const data = { 
-        email: email, 
-        password: password 
+      email: email, 
+      password: password 
     };
 
     axios.post("http://localhost:3001/auth/login", data)
         .then((response) => {
-        history.push("/");
-    });
+          if (response.data.error) {
+            alert(response.data.error); 
+          } else {
+            localStorage.setItem("accessToken", response.data.token);
+          }
+
+
+         /*               
+              setAuthState({
+                username: response.data.username,
+                id: response.data.id,
+                status: true,
+            });
+            history.push("/");
+          }   */        
+        });
   };
 
   return (

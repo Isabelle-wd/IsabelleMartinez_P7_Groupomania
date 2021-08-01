@@ -20,7 +20,7 @@ function App() {
                 <Nav.Link href="/">Publications</Nav.Link>
                 <Nav.Link href="/CreatePost">Créer une publication</Nav.Link>
                 <Nav.Link href="/login">Se connecter</Nav.Link>
-                <Nav.Link href="/signup">S'enregistrer</Nav.Link>
+                <Nav.Link href="/signup">S'inscrire</Nav.Link>
               </Nav>
           </Container>
         </Navbar>

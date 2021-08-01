@@ -8,9 +8,10 @@ router.get("/", async (req, res) => {
     const listOfPosts = await Posts.findAll();
     res.json(listOfPosts);
   }
-  catch (error) {
-    throw error;
-  }
+  catch (error) { 
+    res.status(500).send()
+    console.error(error);
+  };
 });
 
 router.get("/getOnePost/:id", async (req, res) => {
@@ -19,9 +20,10 @@ router.get("/getOnePost/:id", async (req, res) => {
     const post = await Posts.findByPk(id);
     res.json(post);
   }
-  catch (error) {
-    throw error;
-  }
+  catch (error) { 
+    res.status(500).send()
+    console.error(error);
+  };
 });
 
 router.post("/", async (req, res) => {
@@ -30,9 +32,10 @@ router.post("/", async (req, res) => {
     await Posts.create(post);
     res.json(post);
   }
-  catch (error) {
-    throw error;
-  }
+  catch (error) { 
+        res.status(500).send()
+        console.error(error);
+      };
 });
 
 module.exports = router;

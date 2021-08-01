@@ -71,7 +71,7 @@ function Signup() {
                                 isInvalid={!!errors.password}/>
                     </Form.Group>
                     
-                    <Button block type="submit">Je m'enregistre</Button>
+                    <Button block type="submit">Je m'inscrit</Button>
                                 
                               
                 </Form>
