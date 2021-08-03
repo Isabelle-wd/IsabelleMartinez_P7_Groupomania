@@ -39,10 +39,10 @@ function Signup() {
                 <Form className="ms-3" onSubmit={handleSubmit}>
                     <h3>Inscription</h3>
                     <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Email">
-                        <Form.Label>Adresse email</Form.Label>
+                        <Form.Label>Adresse email :</Form.Label>
                             <Form.Control 
                                 type="email" 
-                                placeholder="Entrez votre adresse mail Groupomania" 
+                                placeholder="@groupomania.com" 
                                 name="email" 
                                 value={values.email} 
                                 onChange={handleChange}
@@ -50,7 +50,7 @@ function Signup() {
                             />
                     </Form.Group>
                     <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Username">
-                        <Form.Label>Identifiant</Form.Label>                        
+                        <Form.Label>Identifiant :</Form.Label>                        
                             <Form.Control
                                 type="text"
                                 placeholder="Choisissez un pseudo"
@@ -62,7 +62,7 @@ function Signup() {
                     </Form.Group>
 
                     <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Password">
-                        <Form.Label>Mot de passe</Form.Label>
+                        <Form.Label>Mot de passe :</Form.Label>
                             <Form.Control 
                                 type="password"
                                 placeholder="Le MDP doit contenir 8 caractères minimum dont une majuscule, une minuscule, un chiffre et un caractère spécial"

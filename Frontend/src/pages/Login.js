@@ -24,7 +24,7 @@ function Login() {
       password: password 
     };
 
-    axios.post("http://localhost:3001/auth/login", data)
+    axios.post("http://localhost:3001/auth/login", data,)
         .then((response) => {
           if (response.data.error) {
             alert(response.data.error); 
@@ -48,16 +48,17 @@ function Login() {
     <div className="loginContainer">     
       <Form className="ms-3" onSubmit={handleSubmit}>
       <h3>Connexion</h3>
-        <Form.Group className="mb-3" style={{ width: "600px" }} size="lg" controlId="email">
+        <Form.Group className="mb-3" style={{ width: "600px" }} controlId="email">
           <Form.Label>Adresse email :</Form.Label>
           <Form.Control
             autoFocus
+            placeholder="@groupomania.com"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
-        <Form.Group className="mb-3" style={{ width: "600px" }} size="lg" controlId="password">
+        <Form.Group className="mb-3" style={{ width: "600px" }} controlId="password">
           <Form.Label>Mot de passe :</Form.Label>
           <Form.Control
             type="password"
