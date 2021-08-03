@@ -47,6 +47,7 @@ function Login() {
   return (
     <div className="loginContainer">     
       <Form className="ms-3" onSubmit={handleSubmit}>
+      <h3>Connexion</h3>
         <Form.Group className="mb-3" style={{ width: "600px" }} size="lg" controlId="email">
           <Form.Label>Adresse email :</Form.Label>
           <Form.Control
@@ -64,7 +65,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block type="submit" onClick={login} disabled={!validateForm()}>
+        <Button block type="submit" className="btn btn-dark btn-lg btn-block" onClick={login} disabled={!validateForm()}>
           Je me connecte
         </Button>
       </Form>

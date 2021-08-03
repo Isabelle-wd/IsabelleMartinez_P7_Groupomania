@@ -12,11 +12,21 @@ function Post() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/posts/getOnePost/${id}`)
+        axios.get(`http://localhost:3001/posts/getOnePost/${id}`,
+        {
+          headers: {
+            "Authorization" : "Bearer " + localStorage.getItem("token")
+          },
+        })
             .then((response) => {
               setPostObject(response.data);
             });
-        axios.get(`http://localhost:3001/comments/${id}`)
+        axios.get(`http://localhost:3001/comments/${id}`,
+        {
+          headers: {
+            "Authorization" : "Bearer " + localStorage.getItem("token")
+          },
+        })
           .then((response) => {
             setComments(response.data);
         });    
@@ -25,19 +35,26 @@ function Post() {
 
     const addComment = () => {
       axios.post("http://localhost:3001/comments", {
-        comments: newComment, 
+        message: newComment, 
         PostId: id
-      })
-
-
+      },
+      {
+        headers: {
+          "Authorization" : "Bearer " + localStorage.getItem("token")
+        },
+      }
+      )
         .then((response) => {
           if (response.data.error) {
             console.log(response.data.error);
           } else {
           const commentToAdd = { 
-            comments: newComment,
-          };
+            message: newComment,
+            username: response.data.username,
+          }
+          
           setComments([...comments, commentToAdd]);
+          setNewComment("");
         }
         });
     };
@@ -69,18 +86,16 @@ function Post() {
               return (
                 <Card className="mt-3" style={{ width: "600px" }}>
                 <Card.Body>
-                  <Card.Title>username</Card.Title>
-                  <Card.Text key={key} className="comment"> {comment.comments}</Card.Text>  
+                  <Card.Title> {comment.username}</Card.Title>
+                  <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
                   <Card.Link href="#">Card Link</Card.Link>
                 </Card.Body>
                 </Card>
               )
             })}
           </div>      
-      </div>
-
-        
-        )    
+      </div>        
+    )    
 }
 
 export default Post;

@@ -3,7 +3,6 @@ const router = express.Router();
 const { Comments } = require("../models");
 const auth = require("../middleware/auth");
 
-
 router.get("/:postId", auth, async (req, res) => {
     const postId = req.params.postId;
     const comments = await Comments.findAll({

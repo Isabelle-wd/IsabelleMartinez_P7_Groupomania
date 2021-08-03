@@ -13,9 +13,16 @@ function Home() {
     let history = useHistory()
 
     useEffect(() => {
-        axios.get("http://localhost:3001/posts")
-            .then((response) => {setListOfPosts(response.data)
-        });
+        axios.get("http://localhost:3001/posts",
+        {
+          headers: {
+            "Authorization" : "Bearer " + localStorage.getItem("token")
+          },
+        })
+            .then((response) => {setListOfPosts(response.data)})
+            .catch(error => {
+              console.error(error);
+            })
     }, []);
 
     return (

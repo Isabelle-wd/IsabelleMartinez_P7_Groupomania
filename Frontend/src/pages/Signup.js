@@ -37,6 +37,7 @@ function Signup() {
                 handleSubmit, handleChange, values, errors
             }) => (
                 <Form className="ms-3" onSubmit={handleSubmit}>
+                    <h3>Inscription</h3>
                     <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Email">
                         <Form.Label>Adresse email</Form.Label>
                             <Form.Control 
@@ -71,7 +72,7 @@ function Signup() {
                                 isInvalid={!!errors.password}/>
                     </Form.Group>
                     
-                    <Button block type="submit">Je m'inscrit</Button>
+                    <Button block type="submit" className="btn btn-dark btn-lg btn-block">Je m'inscrit</Button>
                                 
                               
                 </Form>
