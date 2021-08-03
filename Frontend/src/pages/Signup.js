@@ -1,5 +1,6 @@
 import React from "react";
-import {Form, Button} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Form, Button, Col} from "react-bootstrap";
 import {Formik} from "formik"; // Validation des formulaires
 import * as Yup from "yup"; // Validation des données du formulaire
 import axios from "axios";
@@ -12,11 +13,10 @@ function Signup() {
     };
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().email("adresse email non valide").required(),
+        email: Yup.string().email("Adresse email non valide").required(),
         username: Yup.string().min(3).max(25).required(),
         password: Yup.string().matches(
-            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-            "Le MDP doit contenir 8 caractères minimum dont une majuscule, une minuscule, un chiffre et un caractère spécial"
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
           ).required(), 
     });
 
@@ -37,44 +37,50 @@ function Signup() {
                 handleSubmit, handleChange, values, errors
             }) => (
                 <Form className="ms-3" onSubmit={handleSubmit}>
-                    <h3>Inscription</h3>
-                    <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Email">
+                    <h3 className="my-5"><u>Inscription</u></h3>
+                    <Form.Group className="mb-3" controlId="Email">
                         <Form.Label>Adresse email :</Form.Label>
-                            <Form.Control 
-                                type="email" 
-                                placeholder="@groupomania.com" 
-                                name="email" 
-                                value={values.email} 
-                                onChange={handleChange}
-                                isInvalid={!!errors.email}
-                            />
+                            <Col sm={5}>
+                                <Form.Control 
+                                    type="email" 
+                                    placeholder="@groupomania.com" 
+                                    name="email" 
+                                    value={values.email} 
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.email}
+                                />
+                            </Col>
                     </Form.Group>
-                    <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Username">
-                        <Form.Label>Identifiant :</Form.Label>                        
-                            <Form.Control
-                                type="text"
-                                placeholder="Choisissez un pseudo"
-                                name="username"
-                                value={values.username}
-                                onChange={handleChange}
-                                isInvalid={!!errors.username}
-                            />
+                    <Form.Group className="mb-3" controlId="Username">
+                        <Form.Label>Identifiant :</Form.Label> 
+                            <Col sm={5}>                       
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Choisissez un pseudo"
+                                    name="username"
+                                    value={values.username}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.username}
+                                />
+                            </Col>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" style={{ width: "600px" }} controlId="Password">
+                    <Form.Group className="mb-3" controlId="Password">
                         <Form.Label>Mot de passe :</Form.Label>
-                            <Form.Control 
-                                type="password"
-                                placeholder="Le MDP doit contenir 8 caractères minimum dont une majuscule, une minuscule, un chiffre et un caractère spécial"
-                                name="password"
-                                value={values.password}
-                                onChange={handleChange}
-                                isInvalid={!!errors.password}/>
-                    </Form.Group>
-                    
-                    <Button block type="submit" className="btn btn-dark btn-lg btn-block">Je m'inscrit</Button>
-                                
-                              
+                            <Col sm={5}>
+                                <Form.Control 
+                                    type="password"
+                                    name="password"
+                                    value={values.password}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.password}
+                                />
+                                <Form.Text className="text-muted">
+                                    Le mot de passe doit contenir 8 caractères minimum dont une majuscule, une minuscule, un chiffre et un caractère spécial.
+                                </Form.Text>
+                            </Col>
+                    </Form.Group>    
+                    <Button block type="submit" className="btn btn-dark btn-lg btn-block">Je m'inscrit</Button>                     
                 </Form>
             )}
             </Formik>

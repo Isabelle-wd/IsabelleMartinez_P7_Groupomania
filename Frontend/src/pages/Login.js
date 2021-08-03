@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {Form, Button} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Form, Button, Col} from "react-bootstrap";
 import axios from "axios";
 // import { useHistory } from "react-router-dom";
 // import { AuthContext } from "../helpers/AuthContext";
@@ -47,24 +48,28 @@ function Login() {
   return (
     <div className="loginContainer">     
       <Form className="ms-3" onSubmit={handleSubmit}>
-      <h3>Connexion</h3>
-        <Form.Group className="mb-3" style={{ width: "600px" }} controlId="email">
+      <h3 className="my-5"><u>Connexion</u></h3>
+        <Form.Group className="mb-3" controlId="email">
           <Form.Label>Adresse email :</Form.Label>
-          <Form.Control
-            autoFocus
-            placeholder="@groupomania.com"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <Col sm={5}>
+              <Form.Control
+                autoFocus
+                placeholder="@groupomania.com"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Col>
         </Form.Group>
-        <Form.Group className="mb-3" style={{ width: "600px" }} controlId="password">
+        <Form.Group className="mb-3" controlId="password">
           <Form.Label>Mot de passe :</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <Col sm={5}>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Col>
         </Form.Group>
         <Button block type="submit" className="btn btn-dark btn-lg btn-block" onClick={login} disabled={!validateForm()}>
           Je me connecte

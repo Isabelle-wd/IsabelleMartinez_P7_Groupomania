@@ -6,10 +6,9 @@ import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import { NoMatch } from "./pages/NoMatch";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
-
-
 
 function App() {
   
@@ -24,12 +23,10 @@ function App() {
             <Route path="/Post/:id" component={Post}/>
             <Route path="/Signup" component={Signup}/>
             <Route path="/Login" component={Login}/>
+            <Route component={NoMatch}/>
           </Switch> 
         </Router>
-      </Layout>
-      
-     
-      
+      </Layout>      
     </div>
   );
 }
