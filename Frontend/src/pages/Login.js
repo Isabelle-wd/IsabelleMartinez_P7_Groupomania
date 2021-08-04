@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Form, Button, Col} from "react-bootstrap";
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // import { AuthContext } from "../helpers/AuthContext";
 
 function Login() {
@@ -17,7 +17,7 @@ function Login() {
     event.preventDefault();
   }
 
-//  let history = useHistory();
+let history = useHistory();
 
   const login = () => {
     const data = { 
@@ -31,17 +31,8 @@ function Login() {
             alert(response.data.error); 
           } else {
             localStorage.setItem("accessToken", response.data.token);
-          }
-
-
-         /*               
-              setAuthState({
-                username: response.data.username,
-                id: response.data.id,
-                status: true,
-            });
-            history.push("/");
-          }   */        
+          }       
+            history.push("/");                
         });
   };
 
