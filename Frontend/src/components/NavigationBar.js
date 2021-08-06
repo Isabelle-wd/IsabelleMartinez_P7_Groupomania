@@ -6,7 +6,7 @@ const Styles = styled.div`
     .navbar {
         background-color: #222;
     }
-
+   
     .navbar-brand, .navbar-nav .nav-link {
         color: #bbb;
 
@@ -18,11 +18,11 @@ const Styles = styled.div`
 
 export const NavigationBar = () => (
     <Styles>
-        <Navbar expand="lg">
+        <Navbar expand="lg" variant="dark">
               <Navbar.Brand className="ms-3" href="/">
                 <img
                   alt=""
-                  src= "../images/icon.svg"
+                  src= "/images/icon.svg"
                   width= "50"
                   height= "50"
                   className="d-inline-block align-top"

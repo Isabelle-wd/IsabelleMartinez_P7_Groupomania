@@ -16,10 +16,10 @@ function Home() {
         history.push("/login");
       } else {
           axios.get("http://localhost:3001/posts",{        
-            headers: { accessToken: localStorage.getItem("accessToken") },
+            headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
         })
             .then((response) => {
-              setListOfPosts(response.data.listOfPosts);            
+              setListOfPosts(response.data);            
             })
             }
             // eslint-disable-next-line

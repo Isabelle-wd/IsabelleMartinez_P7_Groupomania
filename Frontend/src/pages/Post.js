@@ -14,18 +14,14 @@ function Post() {
     useEffect(() => {
         axios.get(`http://localhost:3001/posts/getOnePost/${id}`,
         {
-          headers: {
-            accessToken: localStorage.getItem("accessToken")
-          },
+          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
         })
             .then((response) => {
               setPostObject(response.data);
             });
         axios.get(`http://localhost:3001/comments/${id}`,
         {
-          headers: {
-            accessToken: localStorage.getItem("accessToken")
-          },
+          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
         })
           .then((response) => {
             setComments(response.data);
@@ -33,15 +29,14 @@ function Post() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const addComment = () => {
+    const addComment = (e) => {
+      e.preventDefault();
       axios.post("http://localhost:3001/comments", {
         message: newComment, 
         PostId: id
       },
       {
-        headers: {
-          accessToken: localStorage.getItem("accessToken") 
-        },
+        headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } 
       }
       )
         .then((response) => {

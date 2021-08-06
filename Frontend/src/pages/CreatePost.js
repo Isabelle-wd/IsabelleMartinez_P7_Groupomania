@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Form, Button, Col} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
@@ -32,7 +32,7 @@ function CreatePost() {
 
     const onSubmit = (data) => {
         axios.post("http://localhost:3001/posts", data, {
-            headers: { accessToken: localStorage.getItem("accessToken") },
+            headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
     })
             .then((response) => {
                 history.push("/");

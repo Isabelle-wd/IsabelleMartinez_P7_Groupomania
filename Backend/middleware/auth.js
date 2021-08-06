@@ -1,20 +1,21 @@
-const { verify } = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
-const validateToken = (req, res, next) => {
-  const accessToken = req.header("accessToken");
-
-  if (!accessToken) return res.json({ error: "User not logged in!" });
-
+module.exports = (req, res, next) => {
   try {
-    const validToken = verify(accessToken, "importantsecret");
-    req.user = validToken;
-    if (validToken) {
-      return next();
-    }
-  } catch (err) {
-    return res.json({ error: err });
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, process.env.TOKEN);
+    const userId = decodedToken.userId;
+
+    req.user = decodedToken
+    next()
+
+  } 
+  catch {
+    res.status(401).json({
+      error:"Token JWT invalide!"
+    });
   }
 };
 
-module.exports = { validateToken };
 
