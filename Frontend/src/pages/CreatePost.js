@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Form, Button, Col} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import {Formik } from "formik"; 
 import * as Yup from "yup"; // Validation des formulaires
 import axios from "axios";
+//import { AuthContext } from "../helpers/AuthContext";
 
 function CreatePost() {
     let history = useHistory(); // Retour à la page d'accueil une fois la publication validée
@@ -15,6 +16,13 @@ function CreatePost() {
         username: "",
     };
 
+    useEffect(() => {
+        if (!localStorage.getItem("accessToken")) {
+          history.push("/login");
+        }
+        // eslint-disable-next-line
+      }, []);
+
     const validationSchema = Yup.object().shape({
         title: Yup.string().required("N'oubliez pas de mettre un titre à votre publication!!"),
         content: Yup.string().required(),
@@ -23,7 +31,9 @@ function CreatePost() {
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001/posts", data)
+        axios.post("http://localhost:3001/posts", data, {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+    })
             .then((response) => {
                 history.push("/");
             });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component} from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
@@ -10,10 +10,10 @@ import { NoMatch } from "./pages/NoMatch";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
 
-function App() {
-  
-  return (
-    <div className="App">
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
       <NavigationBar/>
       <Layout>
         <Router>   
@@ -27,8 +27,9 @@ function App() {
           </Switch> 
         </Router>
       </Layout>      
-    </div>
-  );
+      </div>
+    );
+  }
 }
 export default App;
 

@@ -15,7 +15,7 @@ function Post() {
         axios.get(`http://localhost:3001/posts/getOnePost/${id}`,
         {
           headers: {
-            "Authorization" : "Bearer " + localStorage.getItem("token")
+            accessToken: localStorage.getItem("accessToken")
           },
         })
             .then((response) => {
@@ -24,7 +24,7 @@ function Post() {
         axios.get(`http://localhost:3001/comments/${id}`,
         {
           headers: {
-            "Authorization" : "Bearer " + localStorage.getItem("token")
+            accessToken: localStorage.getItem("accessToken")
           },
         })
           .then((response) => {
@@ -40,7 +40,7 @@ function Post() {
       },
       {
         headers: {
-          "Authorization" : "Bearer " + localStorage.getItem("token")
+          accessToken: localStorage.getItem("accessToken") 
         },
       }
       )
@@ -86,7 +86,7 @@ function Post() {
               return (
                 <Card className="mt-3" style={{ width: "600px" }}>
                 <Card.Body>
-                  <Card.Title> {comment.username}</Card.Title>
+                  <Card.Title> {comment.username} </Card.Title>
                   <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
                   <Card.Link href="#">Card Link</Card.Link>
                 </Card.Body>

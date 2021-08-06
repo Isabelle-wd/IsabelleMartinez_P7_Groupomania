@@ -28,8 +28,8 @@ export const NavigationBar = () => (
                   className="d-inline-block align-top"
         />{' '}
                 Groupomania</Navbar.Brand>
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end mx-3">
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end mx-3">
                 <Nav>
                   <Nav.Link href="/CreatePost">Créer une publication</Nav.Link>
                   <Nav.Link href="/login">Se connecter</Nav.Link>

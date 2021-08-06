@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { Posts } = require("../models");
 //const multer = require("../middleware/multer-config")
-const auth = require("../middleware/auth")
+const { validateToken } = require("../middleware/auth");
 
-router.post("/", auth, async (req, res) => {
+router.post("/", validateToken, async (req, res) => {
   try {
     const post = req.body;
     await Posts.create(post);
@@ -16,7 +16,7 @@ router.post("/", auth, async (req, res) => {
       };
 });
 
-router.get("/", auth, async (req, res) => {
+router.get("/", validateToken, async (req, res) => {
   try {
     const listOfPosts = await Posts.findAll();
     res.json(listOfPosts);
@@ -27,7 +27,7 @@ router.get("/", auth, async (req, res) => {
   };
 });
 
-router.get("/getOnePost/:id", auth, async (req, res) => {
+router.get("/getOnePost/:id", validateToken, async (req, res) => {
   try {
     const id = req.params.id;
     const post = await Posts.findByPk(id);
