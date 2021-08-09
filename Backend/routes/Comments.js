@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Comments } = require("../models");
+const Comments = require("../models/Comments");
 const auth = require("../middleware/auth");
 
 router.get("/:postId", auth, async (req, res) => {
@@ -11,11 +11,11 @@ router.get("/:postId", auth, async (req, res) => {
 });
 
 router.post("/", auth, async (req, res) => {
-    const comment = req.body;
-    const username = req.user.username;
-    comment.username = username;
-    await Comments.create(comment);
-    res.json(comment);
+  const comment = req.body;
+  const username = req.user.username;
+  comment.username = username;
+  await Comments.create(comment);
+  res.json(comment);
 });
 
 module.exports = router;

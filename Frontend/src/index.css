@@ -1,7 +1,11 @@
-
+html {
+  height: 100%;
+}
 
 body {
-
+  padding-top: 100px;
+  height: 100%;
+  margin: auto;
   font-family: sans-serif;
   background: #FFD7D7;  
   background: -webkit-linear-gradient(to right, #FD2D01, #FFD7D7, #ffffff);  

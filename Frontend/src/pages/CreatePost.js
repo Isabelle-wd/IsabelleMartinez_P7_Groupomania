@@ -13,7 +13,7 @@ function CreatePost() {
         title:"",
         content:"",
         url: null,
-        username: "",
+       
     };
 
     useEffect(() => {
@@ -27,7 +27,7 @@ function CreatePost() {
         title: Yup.string().required("N'oubliez pas de mettre un titre à votre publication!!"),
         content: Yup.string().required(),
         url: Yup.mixed(),
-        username: Yup.string().min(3).max(25).required(),
+        
     });
 
     const onSubmit = (data) => {
@@ -77,19 +77,7 @@ function CreatePost() {
                             </Col> 
                     </Form.Group>
 
-                    <Form.Group className="position-relative mb-3">
-                        <Form.Label> Identifiant : </Form.Label>    
-                            <Col sm={10}>                    
-                                <Form.Control
-                                    id="inputCreatePost"
-                                    name="username"
-                                    placeholder="votre pseudo"
-                                    value={values.username}
-                                    onChange={handleChange}
-                                    isInvalid={!!errors.username}
-                                />    
-                            </Col>
-                    </Form.Group>
+                   
                     
                     <Form.Group className="position-relative mb-3">
                             <Form.Label>Photo/Vidéo :</Form.Label>

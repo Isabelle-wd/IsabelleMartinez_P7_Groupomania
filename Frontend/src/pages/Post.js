@@ -1,15 +1,18 @@
 import React from "react";
 import {Card, Container, Form, Button} from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios"; // Facilite les requêtes API
+import { AuthContext } from "../helpers/AuthContext";
 
 function Post() {
     let {id} = useParams();
     const [postObject,setPostObject] = useState({});
     const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState("")
+    const [newComment, setNewComment] = useState("");
+    const { authState } = useContext(AuthContext);
 
+    let history = useHistory();
 
     useEffect(() => {
         axios.get(`http://localhost:3001/posts/getOnePost/${id}`,
@@ -46,8 +49,7 @@ function Post() {
           const commentToAdd = { 
             message: newComment,
             username: response.data.username,
-          }
-          
+          };
           setComments([...comments, commentToAdd]);
           setNewComment("");
         }
@@ -83,7 +85,6 @@ function Post() {
                 <Card.Body>
                   <Card.Title> {comment.username} </Card.Title>
                   <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
-                  <Card.Link href="#">Card Link</Card.Link>
                 </Card.Body>
                 </Card>
               )
