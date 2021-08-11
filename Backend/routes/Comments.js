@@ -11,11 +11,24 @@ router.get("/:postId", auth, async (req, res) => {
 });
 
 router.post("/", auth, async (req, res) => {
-  const comment = req.body;
+  const commentData = {
+    comment: req.body.content,
+    createdby: req.user.username,
+    postId: req.body.postId
+  }
+  Comment.create(commentData)
+      .then(() => res.status(201).json({message: "Commentaire enregistré !", data: commentData}))
+      .catch( error => res.status(400).json({error}))
+})
+
+
+
+
+/*   const comment = req.body;
   const username = req.user.username;
   comment.username = username;
   await Comments.create(comment);
   res.json(comment);
-});
+}); */
 
 module.exports = router;

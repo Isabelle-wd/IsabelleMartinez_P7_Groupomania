@@ -21,7 +21,7 @@ export const NavigationBar = () => (
         <Navbar expand="lg" variant="dark" fixed="top">
               <Navbar.Brand className="ms-3" href="/">
                 <img
-                  alt=""
+                  alt="logo groupomania"
                   src= "/images/icon.svg"
                   width= "50"
                   height= "50"

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import {Form, Button, Col} from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -37,7 +36,7 @@ let history = useHistory();
   };
 
   return (
-    <div className="loginContainer">     
+    <container className="loginContainer">     
       <Form className="ms-3" onSubmit={handleSubmit}>
       <h3 className="my-5"><u>Connexion</u></h3>
         <Form.Group className="mb-3" controlId="email">
@@ -66,7 +65,7 @@ let history = useHistory();
           Je me connecte
         </Button>
       </Form>
-    </div>
+    </container>
   );
 }
 export default Login;

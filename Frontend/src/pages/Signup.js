@@ -1,5 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import {Form, Button, Col} from "react-bootstrap";
 import {Formik} from "formik"; // Validation des formulaires
 import * as Yup from "yup"; // Validation des données du formulaire
@@ -28,7 +27,7 @@ function Signup() {
       };
 
     return (
-        <div className="signup">
+        <container className="signupContainer">
             <Formik 
                 initialValues={initialValues} 
                 onSubmit={onSubmit}
@@ -84,7 +83,7 @@ function Signup() {
                 </Form>
             )}
             </Formik>
-        </div>
+        </container>
     )
 }
 
