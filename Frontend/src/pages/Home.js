@@ -28,7 +28,7 @@ function Home() {
 
     return (
       <div>
-        {listOfPosts && listOfPosts.length > 0
+        {listOfPosts
           ? listOfPosts.map((value, key) => {
             return (              
               <Container key={key} className="position-relative post" 

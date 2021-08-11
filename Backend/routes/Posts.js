@@ -7,6 +7,7 @@ const auth = require("../middleware/auth");
 router.post("/", auth, async (req, res) => {
   try {
     const post = req.body;
+    post.UserId = req.user.id;
     await Posts.create(post);
     res.json(post);
   }
