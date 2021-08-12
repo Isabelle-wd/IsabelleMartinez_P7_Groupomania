@@ -12,10 +12,7 @@ module.exports = async (req, res, next) => {
     if (!req.user) {
       throw new Error("user does not exist");
     }
-     
-        next();
-      
-
+        next(); 
   } 
   catch (e) {
     console.error(e);

@@ -5,11 +5,9 @@ const auth = require("../middleware/auth");
 
 router.get("/:postId", auth, async (req, res) => {
     const postId = req.params.postId;
-    
     const comments = await Comments.findAll({
       where: { postId: postId}
-    })
-        
+    })       
     res.json(comments);
 });
 
@@ -19,19 +17,9 @@ router.post("/", auth, async (req, res) => {
     createdby: req.user.username,
     postId: req.body.postId
   }
-  Comment.create(commentData)
+  Comments.create(commentData)
       .then(() => res.status(201).json({message: "Commentaire enregistré !", data: commentData}))
       .catch( error => res.status(400).json({error}))
 })
-
-
-
-
-/*   const comment = req.body;
-  const username = req.user.username;
-  comment.username = username;
-  await Comments.create(comment);
-  res.json(comment);
-}); */
 
 module.exports = router;

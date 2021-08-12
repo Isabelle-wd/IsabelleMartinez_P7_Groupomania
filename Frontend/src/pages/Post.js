@@ -64,7 +64,7 @@ function Post() {
               <Card.Body>
                 <Card.Title as="h6">{postObject.title}</Card.Title> 
                 <Card.Text>{postObject.content}</Card.Text>
-                <cite title="username">{postObject.username}</cite>
+                <cite title="username">{postObject.userId}</cite>
               </Card.Body>               
             </Card>
           </Container>
@@ -90,7 +90,7 @@ function Post() {
               return (
                 <Card className="mt-3" style={{ width: "600px" }}>
                 <Card.Body>
-                  <Card.Title> {comment.username} </Card.Title>
+                  <Card.Title> {comment.userId} </Card.Title>
                   <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
                 </Card.Body>
                 </Card>
