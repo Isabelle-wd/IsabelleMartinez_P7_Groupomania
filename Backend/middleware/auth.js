@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
     console.log(decodedToken);
     req.user = await Users.findByPk(userId)  
     if (!req.user) {
-      throw new Error("user does not exist");
+      throw new Error("utilisateur inconnu");
     }
         next(); 
   } 

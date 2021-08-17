@@ -10,6 +10,7 @@ import { NoMatch } from "./pages/NoMatch";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
 
+
 class App extends Component {
   render() {
     return (
@@ -17,7 +18,7 @@ class App extends Component {
       <NavigationBar/>
       <Layout>
         <Router>   
-            <Switch>
+          <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/CreatePost" component={CreatePost}/>
             <Route path="/Post/:id" component={Post}/>
