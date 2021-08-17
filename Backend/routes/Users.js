@@ -3,6 +3,7 @@ const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require ("bcrypt");
 const { sign } = require("jsonwebtoken");
+const auth = require("../middleware/auth");
 require("dotenv").config();
 
 
@@ -56,7 +57,7 @@ router.post("/login", async (req, res) => {
       };
 }); 
     
-router.get("/auth", (req, res) => {
+router.get("/auth", auth, (req, res) => {
     res.json(req.user);
 });
 

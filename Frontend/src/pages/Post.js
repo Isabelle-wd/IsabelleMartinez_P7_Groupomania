@@ -3,16 +3,16 @@ import {Card, Container, Form, Button} from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios"; // Facilite les requêtes API
-//import { AuthContext } from "../helpers/AuthContext";
+import { AuthContext } from "../helpers/AuthContext";
 
 function Post() {
     let {id} = useParams();
     const [postObject,setPostObject] = useState({});
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-//    const { authState } = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
 
-//    let history = useHistory();
+    let history = useHistory();
 
     useEffect(() => {
         axios.get(`http://localhost:3001/posts/getOnePost/${id}`,
@@ -77,7 +77,8 @@ function Post() {
                   as="textarea" 
                   placeholder="Votre commentaire" 
                   value= {newComment}
-                  rows={2} style={{ width: "600px" }} 
+                  rows={2} 
+                  style={{ width: "600px" }} 
                   onChange={(event) => {setNewComment(event.target.value)}}/>
               </Form.Group>
               <Button variant="primary" type="submit" onClick={addComment}>Ajouter</Button>  

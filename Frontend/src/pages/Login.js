@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {Form, Button, Col} from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-// import { AuthContext } from "../helpers/AuthContext";
+import { AuthContext } from "../helpers/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {setAuthState} = useContext(AuthContext);
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -30,8 +31,14 @@ let history = useHistory();
             alert(response.data.error); 
           } else {
             localStorage.setItem("accessToken", response.data.token);
+            setAuthState({
+              email: response.data.email,
+              id: response.data.id,
+              status: true,
+            });
+            history.push("/");  
           }       
-            history.push("/");                
+                          
         });
   };
 
