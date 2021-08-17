@@ -22,6 +22,7 @@ function Post() {
             .then((response) => {
               setPostObject(response.data);
             });
+
         axios.get(`http://localhost:3001/comments/${id}`,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
@@ -53,6 +54,30 @@ function Post() {
           setComments([...comments, commentToAdd]);
           setNewComment("");
         }
+        });
+    };
+
+    const deleteComment = (id) => {
+      axios
+        .delete(`http://localhost:3001/comments/${id}`, {
+          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
+        })
+        .then(() => {
+          setComments(
+            comments.filter((val) => {
+              return val.id != id;
+            })
+          );
+        });
+    };
+  
+    const deletePost = (id) => {
+      axios
+        .delete(`http://localhost:3001/posts/${id}`, {
+          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
+        })
+        .then(() => {
+          history.push("/");
         });
     };
 
@@ -93,6 +118,7 @@ function Post() {
                 <Card.Body>
                   <Card.Title> {comment.userId} </Card.Title>
                   <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
+
                 </Card.Body>
                 </Card>
               )

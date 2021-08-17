@@ -28,6 +28,16 @@ router.post("/", auth, async (req, res) => {
     res.status(500).json({ error: error});
   }
 });
+
+router.delete("/:commentId", auth, async (req, res) =>{
+  const commentId = req.params.commentId;
+
+  Comments.destroy({
+    where: { id: commentId}
+  })
+})
+
+
 /*   const commentData = {
     comment: req.body.content,
     createdby: req.user.username,

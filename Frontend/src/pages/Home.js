@@ -2,11 +2,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {Card, Container} from "react-bootstrap";
+import Heart from "react-animated-heart";
 import axios from "axios"; // Facilite les requêtes API
 
 
 function Home() {
     const [listOfPosts, setListOfPosts] = useState([]);
+    const [isClick, setClick] = useState(false);
     //const [likedPosts, setLikedPosts] = useState([]);
     let history = useHistory()
 
@@ -65,21 +67,22 @@ function Home() {
         {listOfPosts
           ? listOfPosts.map((value, key) => {
             return (              
-              <Container key={key} className="position-relative post" 
-                onClick={() => {history.push(`/post/${value.id}`)}}>
-                  <Card className="mb-3" style={{ width: '600px' }}>     
-                    <Card.Header className="text-center" as="h6">{value.title}</Card.Header>     
-                    <Card.Body>
-                      <Card.Img variant="top" src={value.url} />
-                      <Card.Text>{value.content}</Card.Text>
-                      <cite title="username">{value.username}</cite>
-                    </Card.Body>
-                    <Card.Footer className="text-muted">
-                      <Card.Link href="#">Commenter</Card.Link>
-                      <button onClick={likePost(value.id)}>Like</button>
-                      <label> {value.Likes.length} </label>
-                    </Card.Footer>             
-                  </Card>
+              <Container key={key} className="position-relative post">
+                <Card className="mb-3" style={{ width: '600px' }}>     
+                  <Card.Header className="text-center" as="h6">{value.title}</Card.Header>     
+                  <Card.Body onClick={() => {history.push(`/post/${value.id}`)}}>
+                    <Card.Img variant="top" src={value.url} />
+                    <Card.Text>{value.content}</Card.Text>
+                    <cite title="username">{value.username}</cite>
+                  </Card.Body>
+                  <Card.Footer className="text-muted">
+                    <Card.Link href="#">Commenter</Card.Link>
+                    <Heart 
+                      isClick={isClick} 
+                      onClick={() => setClick(!isClick)} />
+                    <label> {value.Likes.length} </label>
+                  </Card.Footer>             
+                </Card>
               </Container>
             );
           })
