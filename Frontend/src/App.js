@@ -9,13 +9,14 @@ import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import { NoMatch } from "./pages/NoMatch";
 import { Layout } from "./components/Layout";
 import { AuthContext } from "./helpers/AuthContext";
 
 function App() { 
   const [authState, setAuthState] = useState({
-    email:"", 
+    username:"", 
     id: 0, 
     status: false,
   });
@@ -31,7 +32,7 @@ function App() {
           setAuthState({ ...authState, status: false });
         } else {
           setAuthState({
-            email: response.data.email,
+            username: response.data.username,
             id: response.data.id,
             status: true,
           });
@@ -42,7 +43,7 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem("accessToken");
-    setAuthState({ email: "", id: 0, status: false });
+    setAuthState({ username: "", id: 0, status: false });
   };
 
   
@@ -73,7 +74,7 @@ function App() {
                       ) : (
                         <button className ="btn btn-link mb-2" onClick={logout}> Déconnexion </button>
                       )}
-                    <p class="text-white mt-2">{authState.email}</p>  
+                    <p class="text-white mt-2">{authState.username}</p>  
                     </Nav>
                   </Navbar.Collapse>
               </Navbar>
@@ -84,6 +85,7 @@ function App() {
                 <Route path="/Post/:id" component={Post}/>
                 <Route path="/Signup" component={Signup}/>
                 <Route path="/Login" component={Login}/>
+                <Route path="/Profile/:id" component={Profile}/>
                 <Route component={NoMatch}/>
               </Switch> 
             </Router>

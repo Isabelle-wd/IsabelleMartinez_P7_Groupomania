@@ -32,9 +32,12 @@ router.post("/", auth, async (req, res) => {
 router.delete("/:commentId", auth, async (req, res) =>{
   const commentId = req.params.commentId;
 
-  Comments.destroy({
-    where: { id: commentId}
-  })
+  await Comments.destroy({
+    where: { 
+      id: commentId
+    },
+  });
+  res.json("commentaire supprimé!")
 })
 
 

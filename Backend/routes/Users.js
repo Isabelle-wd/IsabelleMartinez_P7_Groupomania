@@ -27,9 +27,9 @@ router.post("/", async (req, res) => {
 // Connexion
 router.post("/login", async (req, res) => {
     try{
-        const {email, password} = req.body;
+        const {username, password} = req.body;
         const user = await Users.findOne({
-            where: {email: email}
+            where: {username: username}
         });
 
     if (!user) res.json({ error: "Identifiant inconnu!"});
@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
             return res.status(401).json({error: "Mot de passe incorrect !"});
         
         const accessToken = sign({
-            email: user.email, 
+            username: user.username, 
             id: user.id},
             process.env.TOKEN,
             {expiresIn: "24h"}
@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
         res.json({ 
             auth: true, 
             token: accessToken, 
-            email: email, 
+            username: username, 
             id: user.id });
     })}
     catch (error) { 

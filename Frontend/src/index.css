@@ -8,11 +8,6 @@ html {
 
 body {
   padding-top: 100px;
-  margin: auto;
-  font-family: sans-serif;
-  background: #FFD7D7;  
-  background: -webkit-linear-gradient(to right, #FD2D01, #FFD7D7, #ffffff);  
-  background: linear-gradient(to right, #FD2D01, #FFD7D7, #ffffff); 
   
 }
 

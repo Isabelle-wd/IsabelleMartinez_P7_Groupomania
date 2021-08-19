@@ -65,7 +65,7 @@ function Post() {
         .then(() => {
           setComments(
             comments.filter((val) => {
-              return val.id != id;
+              return val.id !== id;
             })
           );
         });
@@ -118,7 +118,13 @@ function Post() {
                 <Card.Body>
                   <Card.Title> {comment.userId} </Card.Title>
                   <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
-
+                  {authState.username === comment.username && 
+                  <button 
+                    onClick={deleteComment} 
+                    type="button" 
+                    className="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                  </button>}
                 </Card.Body>
                 </Card>
               )
