@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import {Navbar, Nav} from "react-bootstrap";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
-
+import Avatar from '@material-ui/core/Avatar';
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
@@ -64,17 +64,20 @@ function App() {
                       Groupomania</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end mx-3">
-                    <Nav>
-                      <Nav.Link href="/CreatePost">Créer une publication</Nav.Link>
+                    <Nav>          
                       {!authState.status ? (
                       <>
                       <Nav.Link href="/login">Connexion</Nav.Link>
                       <Nav.Link href="/signup">Inscription</Nav.Link>
                       </>
-                      ) : (
-                        <button className ="btn btn-link mb-2" onClick={logout}> Déconnexion </button>
-                      )}
-                    <p class="text-white mt-2">{authState.username}</p>  
+                      ) : (     
+                      <>               
+                      <Avatar alt="bla" src="images/pic1.jpg"></Avatar>
+                      <Nav.Link href="/Profile" class="text-white mt-2 ms-2">{authState.username}</Nav.Link>
+                      <Nav.Link href="/CreatePost">Créer une publication</Nav.Link>    
+                      </>                      
+                      )}                     
+                      {authState.status && <button className ="btn btn-link mb-2" onClick={logout}> Déconnexion </button>} 
                     </Nav>
                   </Navbar.Collapse>
               </Navbar>

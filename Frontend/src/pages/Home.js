@@ -1,15 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {Card, Container} from "react-bootstrap";
-import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
-import { AuthContext } from "../helpers/AuthContext";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import axios from "axios"; // Facilite les requêtes API
 
 
 function Home() {
     const [listOfPosts, setListOfPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
-    const { authState } = useContext(AuthContext);
     let history = useHistory()
 
     useEffect(() => {
@@ -86,7 +84,7 @@ function Home() {
                   <Card.Footer className="text-muted">
                     <Card.Link href="#">Commenter</Card.Link>
                     <button>
-                      <SentimentSatisfiedAltIcon 
+                      <FavoriteIcon
                         onClick={() => {
                           likePost(value.id);
                         }}

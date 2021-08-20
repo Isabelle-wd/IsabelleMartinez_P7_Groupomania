@@ -1,104 +1,123 @@
-import React, { useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {Form, Button, Col} from "react-bootstrap";
+import React, { useEffect, Fragment } from "react";
 import { useHistory } from "react-router-dom";
-import {Formik } from "formik"; 
+import { useFormik } from "formik"; 
 import * as Yup from "yup"; // Validation des formulaires
 import axios from "axios";
-//import { AuthContext } from "../helpers/AuthContext";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { PhotoCamera } from "@material-ui/icons";
+import Grid from "@material-ui/core/Grid";
 
-function CreatePost() {
-    let history = useHistory(); // Retour à la page d'accueil une fois la publication validée
-    const initialValues = {
-        title:"",
-        content:"",
-        url: null,
-       
-    };
 
-    useEffect(() => {
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      },
+     
+      form: {
+        width: "100%", 
+        marginTop: theme.spacing(3),
+      },
+      submit: {
+        margin: theme.spacing(3, 0, 2),
+      },
+    }));
+
+function  CreatePost() {
+   const classes = useStyles();
+   let history = useHistory();
+
+   useEffect(() => {
         if (!localStorage.getItem("accessToken")) {
           history.push("/login");
         }
         // eslint-disable-next-line
       }, []);
 
-    const validationSchema = Yup.object().shape({
+   const validationSchema = Yup.object().shape({
         title: Yup.string().required("N'oubliez pas de mettre un titre à votre publication!!"),
         content: Yup.string().required(),
         url: Yup.mixed(),
-        
     });
 
-    const onSubmit = (data) => {
-        axios.post("http://localhost:3001/posts", data, {
-            headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
-    })
-            .then((response) => {
-                history.push("/");
-            });
+    const formik = useFormik({
+        initialValues: {
+            title:"",
+            content:"",
+            url: null, 
+        },  
         
-    };
-    
-    return ( 
-        <div className="createPostPage">
-            <Formik 
-                initialValues={initialValues} 
-                onSubmit={onSubmit}
-                validationSchema={validationSchema}>
-            {({
-                handleSubmit, handleChange, values, errors
-            }) => (
-                <Form className="ms-3" onSubmit={handleSubmit}>
-                    <h3 className="my-5"><u>Quoi de neuf</u> ?</h3>
-                    <Form.Group className="position-relative mb-3">
-                       <Form.Label> Titre :</Form.Label>  
-                            <Col sm={10}>                   
-                                 <Form.Control
-                                     id="inputCreatePost"
-                                     name="title"
-                                     placeholder='(ex. "Quote of the day")'
-                                     onChange={handleChange}
-                                     isInvalid={!!errors.title}
-                                 />
-                             </Col>
-                    </Form.Group>
+        validationSchema: validationSchema,
+        onSubmit: (data) => {
+            axios.post("http://localhost:3001/auth", data,
+		)
+            .then(() => {
+                history.push("/");
+        })},
+    });
 
-                    <Form.Group className="position-relative mb-3">    
-                        <Form.Label> Contenu :</Form.Label>   
-                            <Col sm={10}>                  
-                                <Form.Control
-                                    as="textarea"
-                                    id="inputCreatePost"
-                                    name="content"
-                                    onChange={handleChange}
-                                    isInvalid={!!errors.content}
-                                />
-                            </Col> 
-                    </Form.Group>
-
-                   
-                    
-                    <Form.Group className="position-relative mb-3">
-                            <Form.Label>Photo/Vidéo :</Form.Label>
-                                <Col sm={10}>
-                                    <Form.Control
-                                      id="inputCreatePost"
-                                      type="file"
-                                      name="url"
-                                      onChange={handleChange}
-                                      isInvalid={!!errors.url}
-                                    />   
-                                </Col>
-                    </Form.Group>
-                    
-                        
-                    <Button block type="submit" className="btn btn-dark btn-lg btn-block">Publier</Button>
-                </Form>
-      )}
-            </Formik>
-      
-        </div>
+return (
+   <Container component="main" maxWidth="xs">
+        <CssBaseline />
+    <div className={classes.paper} onSubmit={formik.handleSubmit}>
+    <form className={classes.form} noValidate>
+        <Typography gutterBottom component="h1" variant="h5">
+            Quoi de neuf?
+        </Typography>
+          
+        <Grid container spacing={2}>            
+          <Grid item xs={12}>
+            <TextField 
+               id="outlined-basic" 
+               label="Titre" 
+               variant="outlined" 
+               size="small"
+               fullWidth
+               onChange={formik.handleChange}
+               />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+               id="outlined-textarea"
+               label="Votre message"
+               multiline              
+               fullWidth
+               variant="outlined"
+               onChange={formik.handleChange}               
+             />
+          </Grid>
+        </Grid>       
+        <Fragment>
+          <input
+            color="primary"
+            accept="image/*"
+            type="file"
+            id="icon-button-file"
+            style={{ display: "none", }}
+            onChange={formik.handleChange}
+          />
+          <label htmlFor="icon-button-file">
+            <IconButton
+              variant="contained"
+              component="span"
+              className={classes.button}
+              size="large"
+              color="primary"              
+            >
+              <PhotoCamera fontSize="large" />
+            </IconButton>
+          </label>
+        </Fragment>
+    </form>
+  </div>
+</Container>
     );
 }
 
