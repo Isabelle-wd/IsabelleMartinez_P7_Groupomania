@@ -13,9 +13,9 @@ router.get("/:postId", auth, async (req, res) => {
 
 router.post("/", auth, async (req, res) => {
   try {
-    const comments = req.body.comments;
-    const newComment = await models.Comments.create({ 
-      comments: comments, 
+    const message = req.body.message;
+    const newComment = await Comments.create({ 
+      message: message, 
       UserId: req.user.id, 
       PostId: req.params.id
     });

@@ -4,7 +4,7 @@ function Profile() {
     return (
         <div className="profilePageContainer">
             
-            
+            profile
         </div>
     )
 }

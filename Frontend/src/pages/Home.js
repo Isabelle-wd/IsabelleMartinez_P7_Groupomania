@@ -19,7 +19,8 @@ function Home() {
             headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
         })
         .then((response) => {
-          setListOfPosts(response.data.listOfPosts);
+          setListOfPosts(response.data);
+          console.log(listOfPosts);
           setLikedPosts(
             (response.data.likedPosts || []).map((like) => {
               return like.PostId;
@@ -66,6 +67,7 @@ function Home() {
     };
 
     return (
+      
       <div>
         {listOfPosts
           ? listOfPosts.map((value, key) => {
@@ -88,9 +90,7 @@ function Home() {
                         onClick={() => {
                           likePost(value.id);
                         }}
-                        className={
-                          likedPosts.includes(value.id) ? "unlikeBttn" : "likeBttn"
-                        }
+                       
                         />
                       </button>
                     <label> {value.Likes.length} </label>

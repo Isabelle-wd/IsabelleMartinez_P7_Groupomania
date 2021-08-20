@@ -3,13 +3,9 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik"; 
 import * as Yup from "yup"; // Validation des formulaires
 import axios from "axios";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
+import { Button, CssBaseline, TextField, makeStyles, Container, IconButton, Icon, Typography} from '@material-ui/core';
 import { PhotoCamera } from "@material-ui/icons";
+import SendIcon from '@material-ui/icons/Send';
 import Grid from "@material-ui/core/Grid";
 
 
@@ -27,6 +23,17 @@ const useStyles = makeStyles((theme) => ({
       },
       submit: {
         margin: theme.spacing(3, 0, 2),
+      },
+      root: {
+        '& > *': {
+          margin: theme.spacing(1),
+        },
+      },
+      input: {
+        display: 'none',
+      },
+      button: {
+        margin: theme.spacing(1),
       },
     }));
 
@@ -94,27 +101,33 @@ return (
              />
           </Grid>
         </Grid>       
-        <Fragment>
-          <input
-            color="primary"
-            accept="image/*"
-            type="file"
-            id="icon-button-file"
-            style={{ display: "none", }}
-            onChange={formik.handleChange}
-          />
-          <label htmlFor="icon-button-file">
-            <IconButton
-              variant="contained"
-              component="span"
-              className={classes.button}
-              size="large"
-              color="primary"              
-            >
-              <PhotoCamera fontSize="large" />
-            </IconButton>
-          </label>
-        </Fragment>
+        <div className={classes.root}>
+        <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+      <label htmlFor="icon-button-file">
+        <IconButton size="large" color="primary" aria-label="upload picture" component="span">
+          <PhotoCamera />
+        </IconButton>
+      </label>
+      <input
+        accept="image/*"
+        className={classes.input}
+        id="contained-button-file"
+        multiple
+        type="file"
+      />
+      <label htmlFor="contained-button-file">
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        className={classes.button}
+        SendIcon={<Icon></Icon>}
+      >Envoyer
+        <SendIcon />
+      </Button>
+      </label>
+      
+    </div>
     </form>
   </div>
 </Container>

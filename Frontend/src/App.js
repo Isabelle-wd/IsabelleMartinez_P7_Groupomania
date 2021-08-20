@@ -88,7 +88,7 @@ function App() {
                 <Route path="/Post/:id" component={Post}/>
                 <Route path="/Signup" component={Signup}/>
                 <Route path="/Login" component={Login}/>
-                <Route path="/Profile/:id" component={Profile}/>
+                <Route path="/Profile" component={Profile}/>
                 <Route component={NoMatch}/>
               </Switch> 
             </Router>
