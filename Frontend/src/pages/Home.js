@@ -1,11 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import {Card, Container} from "react-bootstrap";
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import axios from "axios"; // Facilite les requêtes API
 
+import axios from "axios"; 
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 345,
+    marginBottom: 30
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  }, 
+  avatar: {
+    backgroundColor: red[500],
+  },
+}));
 
 function Home() {
+  const classes = useStyles();
     const [listOfPosts, setListOfPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
     let history = useHistory()
@@ -66,41 +93,63 @@ function Home() {
       )
     };
 
-    return (
-      
-      <div>
-        {listOfPosts
-          ? listOfPosts.map((value, key) => {
-            return (              
-              <Container key={key} className="position-relative post">
-                <Card className="mb-3" style={{ width: '600px' }}>     
-                  <Card.Header className="text-center" as="h6">{value.title}</Card.Header>     
-                  <Card.Body 
-                    onClick={() => {
-                      history.push(`/post/${value.id}`)
-                    }}>
-                      <Card.Img variant="top" src={value.url} />
-                      <Card.Text>{value.content}</Card.Text>
-                      <cite title="username">{value.username}</cite>
-                  </Card.Body>
-                  <Card.Footer className="text-muted">
-                    <Card.Link href="#">Commenter</Card.Link>
-                    <button>
-                      <FavoriteIcon
-                        onClick={() => {
-                          likePost(value.id);
-                        }}
-                       
-                        />
-                      </button>
-                    <label> {value.Likes.length} </label>
-                  </Card.Footer>             
-                </Card>
-              </Container>
+return (  
+    <div>
+      {listOfPosts
+        ? listOfPosts.map((value, key) => {
+
+  return (
+  <Container key={key} className="position-relative post">
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              R
+            </Avatar>
+          }
+          title= {value.title}        
+        />
+        <CardMedia
+          className={classes.media}
+          image={value.url}
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {value.content}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton 
+  		      aria-label="add to favorites"
+  		      onClick={() => {
+              likePost(value.id);
+            }}>
+            <FavoriteIcon />
+          </IconButton>
+          <Typography 
+            variant="body2" 
+            color="textSecondary" 
+            component="p"
+          >
+            {value.Likes.length}
+          </Typography>
+          <Button 
+            href="#text-buttons" 
+            color="primary"
+            onClick={() => {
+              history.push(`/post/${value.id}`)
+            }}>
+            Commenter
+          </Button>
+        </CardActions>                  
+      </Card>
+  </Container>
             );
           })
         : "loading..."}     
       </div>
     )
+  
 }
+
 export default Home;
