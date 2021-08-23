@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { Posts, Likes } = require("../models");
-//const multer = require("../middleware/multer-config")
+const multer = require("../middleware/multer-config")
 const auth = require("../middleware/auth");
 
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, multer, async (req, res) => {
   try {
     const post = req.body;
     post.UserId = req.user.id;
@@ -40,6 +40,15 @@ router.get("/getOnePost/:id", auth, async (req, res) => {
   };
 });
 
+router.delete("/:postId", auth, async (req, res) => {
+  const postId = req.params.postId;
+  await Posts.destroy({
+    where: {
+      id: postId,
+    },
+  });
 
+  res.json("DELETED SUCCESSFULLY");
+});
 
 module.exports = router;

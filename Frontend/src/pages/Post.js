@@ -89,7 +89,17 @@ function Post() {
               <Card.Body>
                 <Card.Title as="h6">{postObject.title}</Card.Title> 
                 <Card.Text>{postObject.content}</Card.Text>
-                <cite title="username">{postObject.userId}</cite>
+                <footer>
+                  {postObject.userId}
+                  {authState.username === postObject.username && (
+                  <Button 
+                    variant="danger"
+                    onClick={() => {
+                      deletePost(postObject.id);
+                    }}
+                  >X</Button> 
+                  )}
+                </footer>
               </Card.Body>               
             </Card>
           </Container>
