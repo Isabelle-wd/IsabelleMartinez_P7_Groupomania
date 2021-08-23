@@ -1,23 +1,43 @@
-# IsabelleMartinez_P7_Groupomania
-Création d'un réseau social
+Projet 7 _ Groupomania 
 
-Une fois le repo cloné, il faut dans le terminal:
+♦ Création d'un réseau social ♦ 
 
-cd frontend
-npm start
-pour lancer l'appli
+  
 
-&&
+Repository à cloner: 
 
-./cd backend
-nodemon server
-pour démarrer le serveur
+https://github.com/Isabelle-wd/P7_groupomania.git dans le terminal (ex: VSCODE) 
 
+  
 
-Le backend a été crée avec Node.js, Express.js et MySQL comme base de données.
-Le frontend a été crée avec React.js
+Manipulations à effectuer pour lancer l’application à partir du terminal: 
 
-Les données sensibles sont dans le fichier .env qui n'est pas accessible par le public
+cd frontend 
 
-Droits Admin
-Pour tester les droits d'admin, changez le valeur sur le champ account dans le tableau users, de user pour admin.
+npm start 
+
+→ pour lancer REACT.JS 
+
+(L'application se recharge automatiquement à chaque sauvegarde.) 
+
+ 
+
+&& 
+
+  
+
+./cd backend 
+
+nodemon server 
+
+→ pour démarrer le serveur 
+
+  
+
+  
+
+Le backend a été crée avec Node.js, Express.js et MySQL 
+
+Le frontend a été crée avec React.js 
+
+Les données sensibles sont dans le fichier .env non accessible par le public. 
