@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -33,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
   const classes = useStyles();
-    const [listOfPosts, setListOfPosts] = useState([]);
-    const [likedPosts, setLikedPosts] = useState([]);
-    let history = useHistory()
+  const [listOfPosts, setListOfPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
+  let history = useHistory()
 
     useEffect(() => {
       if (!localStorage.getItem("accessToken")) {
@@ -99,7 +98,7 @@ return (
         ? listOfPosts.map((value, key) => {
 
   return (
-  <Container key={key} className="position-relative post">
+  <Container key={key} >
       <Card className={classes.root}>
         <CardHeader
           avatar={
