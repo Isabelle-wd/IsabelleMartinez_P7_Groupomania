@@ -37,12 +37,21 @@ function Signup() {
     const classes = useStyles();
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().email("Adresse email non valide").required(),
-        username: Yup.string().min(3).max(25).required(),
-        password: Yup.string().matches(
+        email: Yup.string()
+          .email("Adresse email non valide")
+          .required(),
+        username: Yup.string()
+          .min(3)
+          .max(25)
+          .required(),
+        password: Yup.string()
+          .matches(
             /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
-          ).required(), 
+          )
+          .required(), 
     });
+
+   
 
     let history = useHistory();
 

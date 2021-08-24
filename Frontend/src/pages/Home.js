@@ -122,7 +122,8 @@ return (
   		      aria-label="add to favorites"
   		      onClick={() => {
               likePost(value.id);
-            }}>
+            }}
+          >
             <FavoriteIcon />
           </IconButton>
           <Typography 
