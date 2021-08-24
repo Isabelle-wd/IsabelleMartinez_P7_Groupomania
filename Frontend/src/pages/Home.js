@@ -102,9 +102,7 @@ return (
       <Card className={classes.root}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              R
-            </Avatar>
+            <Avatar alt="bla" src="images/profile_pic.png" className={classes.avatar}></Avatar>            
           }
           title= {value.title}        
         />
