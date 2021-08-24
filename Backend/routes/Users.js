@@ -61,5 +61,4 @@ router.get("/auth", auth, (req, res) => {
     res.json(req.user);
 });
 
-
 module.exports = router;

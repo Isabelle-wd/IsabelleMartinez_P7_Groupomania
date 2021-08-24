@@ -97,7 +97,9 @@ function Post() {
                     onClick={() => {
                       deletePost(postObject.id);
                     }}
-                  >X</Button> 
+                  >
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                  </Button> 
                   )}
                 </footer>
               </Card.Body>               
@@ -114,9 +116,17 @@ function Post() {
                   value= {newComment}
                   rows={2} 
                   style={{ width: "600px" }} 
-                  onChange={(event) => {setNewComment(event.target.value)}}/>
+                  onChange={(event) => {
+                    setNewComment(event.target.value)
+                  }}
+                />
               </Form.Group>
-              <Button variant="primary" type="submit" onClick={addComment}>Ajouter</Button>  
+              <Button 
+                variant="primary" 
+                type="submit" 
+                onClick={addComment}
+              >Ajouter
+              </Button>  
             </form>
           </div>
           </Container>
@@ -128,13 +138,14 @@ function Post() {
                 <Card.Body>
                   <Card.Title> {comment.userId} </Card.Title>
                   <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
-                  {authState.username === comment.username && 
-                  <button 
-                    onClick={deleteComment} 
-                    type="button" 
-                    className="btn btn-default btn-lg">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                  </button>}
+                    {authState.username === comment.username && (
+                      <button 
+                        onClick={deleteComment} 
+                        type="button" 
+                        className="btn btn-default btn-lg">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                      </button>
+                  )}
                 </Card.Body>
                 </Card>
               )
