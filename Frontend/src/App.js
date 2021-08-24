@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import {Navbar, Nav} from "react-bootstrap";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
+
 import Avatar from '@material-ui/core/Avatar';
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
@@ -12,6 +13,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import { NoMatch } from "./pages/NoMatch";
 import { Layout } from "./components/Layout";
+
 import { AuthContext } from "./helpers/AuthContext";
 
 function App() { 

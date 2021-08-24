@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const Profiles = sequelize.define("Profiles", {
-        firstName: {
+        fullName: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        lastName: {
+        position: {
             type: DataTypes.STRING,
             allowNull: false,
         },
