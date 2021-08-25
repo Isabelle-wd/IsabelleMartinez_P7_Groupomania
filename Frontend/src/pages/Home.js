@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { DeleteOutlined } from '@material-ui/icons';
 
 
 
@@ -103,8 +104,17 @@ return (
   <Container key={key} >
       <Card className={classes.root}>
         <CardHeader
+          action={
+            <IconButton>
+              <DeleteOutlined />
+            </IconButton>
+          }
           avatar={
-            <Avatar alt="bla" src="images/profile_pic.png" className={classes.avatar}></Avatar>            
+            <Avatar 
+              alt="photo profile" 
+              src="images/profile_pic.png" 
+              className={classes.avatar}>
+            </Avatar>            
           }
           title= {value.title}        
         />
