@@ -14,10 +14,11 @@ router.get("/:postId", auth, async (req, res) => {
 router.post("/", auth, async (req, res) => {
   try {
     const message = req.body.message;
+    const postId = req.body.PostId;
     const newComment = await Comments.create({ 
       message: message, 
       UserId: req.user.id, 
-      PostId: req.params.id
+      PostId: postId, 
     });
     if (newComment) {
       res.status(201).json({ message: "merci de votre commentaire!"});

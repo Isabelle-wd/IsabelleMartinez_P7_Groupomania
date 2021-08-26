@@ -24,6 +24,7 @@ function  CreatePost() {
   const [contentError, setContentError] = useState(false)
 
   const handleSubmit = (e) => {
+    console.log("info")
     e.preventDefault()
     setTitleError(false)
     setContentError(false)
@@ -80,10 +81,9 @@ function  CreatePost() {
               Quoi de neuf?
           </Typography>
 
-          <form noValidate onSubmit={handleSubmit}>
+          <form noValidate onSubmit={(e) =>{handleSubmit(e)}}>
               <TextField 
                 onChange={(e) => setTitle(e.target.value)}
-                value={initialValues}
                 id="title"
                 className={classes.field} 
                 label="Titre" 
@@ -95,10 +95,9 @@ function  CreatePost() {
               />
               <TextField
                 onChange={(e) => setContent(e.target.value)} 
-                value={initialValues}
                 id="content"
                 className={classes.field}
-                label="Votre content"
+                label="Votre contenu"
                 variant="outlined" 
                 multiline  
                 rows={5}            
@@ -125,7 +124,6 @@ function  CreatePost() {
               </div>
               <Button
                 className={classes.button} 
-                value={initialValues}
                 type="submit"
                 variant="contained"
                 color="primary"

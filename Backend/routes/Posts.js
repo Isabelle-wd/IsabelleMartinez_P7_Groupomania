@@ -6,8 +6,10 @@ const auth = require("../middleware/auth");
 
 router.post("/", auth, multer, async (req, res) => {
   try {
-    const post = req.body;
+    const post = JSON.parse(req.body.post);
     post.UserId = req.user.id;
+    post.url = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    console.log(req.file.filename)
     await Posts.create(post);
     res.json(post);
   }
