@@ -52,7 +52,7 @@ function App() {
     return (
       <div className="App">
         <AuthContext.Provider value={{ authState, setAuthState }}>          
-          <Layout>
+         
             <Router>              
               <Navbar expand="lg" bg="dark" variant="dark" fixed="top" className="mb-3">
                     <Navbar.Brand className="ms-3" href="/">
@@ -94,7 +94,7 @@ function App() {
                 <Route component={NoMatch}/>
               </Switch> 
             </Router>
-          </Layout>  
+           
         </AuthContext.Provider>    
       </div>
     );

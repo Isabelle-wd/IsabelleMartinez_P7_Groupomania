@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios"; // Facilite les requêtes API
 import { AuthContext } from "../helpers/AuthContext";
+import { DeleteOutlined } from '@material-ui/icons';
 
 function Post() {
     let {id} = useParams();
@@ -54,26 +55,24 @@ function Post() {
           setComments([...comments, commentToAdd]);
           setNewComment("");
         }
-        });
+      });
     };
 
     const deleteComment = (id) => {
-      axios
-        .delete(`http://localhost:3001/comments/${id}`, {
+      axios.delete(`http://localhost:3001/comments/${id}`, {       
           headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
         })
         .then(() => {
           setComments(
             comments.filter((val) => {
-              return val.id !== id;
+              return val.id !== id
             })
           );
         });
     };
   
     const deletePost = (id) => {
-      axios
-        .delete(`http://localhost:3001/posts/${id}`, {
+      axios.delete(`http://localhost:3001/posts/${id}`, {        
           headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
         })
         .then(() => {
@@ -143,7 +142,7 @@ function Post() {
                         onClick={deleteComment} 
                         type="button" 
                         className="btn btn-default btn-lg">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        <DeleteOutlined />
                       </button>
                   )}
                 </Card.Body>

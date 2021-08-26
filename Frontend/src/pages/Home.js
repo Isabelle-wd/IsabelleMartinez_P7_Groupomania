@@ -13,24 +13,18 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { DeleteOutlined } from '@material-ui/icons';
-
-
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
-    marginBottom: 30
+    maxWidth: "75%",
   },
   media: {
     height: 0,
     paddingTop: '56.25%',
   }, 
-  avatar: {
-    backgroundColor: red[500],
-  },
 }));
 
 function Home() {
@@ -95,71 +89,74 @@ function Home() {
       )
     };
 
-return (  
-    <div>
-      {listOfPosts
-        ? listOfPosts.map((value, key) => {
+  return (  
+      <Container>
+        <Grid container spacing={6}>
+          {listOfPosts
+            ? listOfPosts.map((value, key) => {
 
-  return (
-  <Container key={key} >
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton>
-              <DeleteOutlined />
-            </IconButton>
-          }
-          avatar={
-            <Avatar 
-              alt="photo profile" 
-              src="images/profile_pic.png" 
-              className={classes.avatar}>
-            </Avatar>            
-          }
-          title= {value.title}        
-        />
-        <CardMedia
-          className={classes.media}
-          image={value.url}
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {value.content}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton 
-  		      aria-label="add to favorites"
-  		      onClick={() => {
-              likePost(value.id);
-            }}
-          >
-            <FavoriteIcon />
-          </IconButton>
-          <Typography 
-            variant="body2" 
-            color="textSecondary" 
-            component="p"
-          >
-            {value.Likes.length}
-          </Typography>
-          <Button 
-            href="#text-buttons" 
-            color="primary"
-            onClick={() => {
-              history.push(`/post/${value.id}`)
-            }}>
-            Commenter
-          </Button>
-        </CardActions>                  
-      </Card>
-  </Container>
+            return (
+              <Grid item xs={12} key={key}>
+                <Card className={classes.root} elevation={3}>
+                  <CardHeader
+                    className={classes.header}
+                    action={
+                      <IconButton>
+                        <DeleteOutlined />
+                      </IconButton>
+                    }
+                    avatar={
+                      <Avatar 
+                        alt="photo profile" 
+                        src="images/profile_pic.png" 
+                        className={classes.avatar}>
+                      </Avatar>            
+                    }
+                    title= {value.title}        
+                  />
+                  <CardMedia
+                    className={classes.media}
+                    image={value.url}
+                  />
+                  <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {value.content}
+                    </Typography>
+                  </CardContent>
+                  <CardActions 
+                    spacing={8}>
+                    <IconButton 
+            		      aria-label="add to favorites"
+            		      onClick={() => {
+                        likePost(value.id);
+                      }}
+                    >
+                      <FavoriteIcon />
+                    </IconButton>
+                    <Typography 
+                      variant="body2" 
+                      color="textSecondary" 
+                      component="p"
+                    >
+                      {value.Likes.length}
+                    </Typography>
+                    <Button 
+                      href="#text-buttons" 
+                      size="small"
+                      onClick={() => {
+                        history.push(`/post/${value.id}`)
+                      }}>
+                      Commenter
+                    </Button>
+                  </CardActions>                  
+                </Card>
+              </Grid>
             );
           })
-        : "loading..."}     
-      </div>
-    )
-  
+          : "loading..."}   
+        </Grid>  
+      </Container>
+  )        
 }
 
 export default Home;

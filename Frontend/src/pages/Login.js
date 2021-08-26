@@ -26,11 +26,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
 function Login() {
+  const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const {setAuthState} = useContext(AuthContext);
-  const classes = useStyles();
+  
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
