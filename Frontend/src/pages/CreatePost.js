@@ -64,16 +64,6 @@ function  CreatePost() {
   }, []);
 
  
-        
-/* 
-    const onSubmit: (data) => {
-            axios.post("http://localhost:3001/posts", data,
-		)
-            .then(() => {
-                history.push("/");
-        })},
-    }); */
-
   return (
      <Container> 
           <Typography 
