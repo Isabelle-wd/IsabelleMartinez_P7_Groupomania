@@ -88,10 +88,7 @@ function Post() {
               <Card.Body>
                 <Card.Title as="h6">{postObject.title}</Card.Title> 
                 <Card.Text>{postObject.content}</Card.Text>
-                <footer>
-                  
-                 
-                  
+                <footer>                  
                   {authState.id === postObject.UserId && (
                   <button 
                     className="btn btn-default btn-lg"
@@ -140,7 +137,7 @@ function Post() {
                   <Card.Body>
                     <Card.Title> {comment.userId} </Card.Title>
                     <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
-                      {authState.userId === comment.userId && (
+                      {authState.id === comment.UserId && (
                         <button 
                           onClick={() => {
                             deleteComment(comment.id);
