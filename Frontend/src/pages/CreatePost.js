@@ -20,6 +20,7 @@ function  CreatePost() {
   const classes = useStyles();
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
+  const [url, setUrl] = useState("")
   const [titleError, setTitleError] = useState(false)
   const [contentError, setContentError] = useState(false)
 
@@ -38,11 +39,18 @@ function  CreatePost() {
     }
 
     if (title && content) {
-      axios.post("http://localhost:3001/posts",
+      axios.post("http://localhost:3001/posts",{
+        title: title,
+        content: content,
+        url: url,
+      },
       {
         headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } 
       }
       )
+      .then(() => {
+        history.push("/");
+})
     }
   }
   
