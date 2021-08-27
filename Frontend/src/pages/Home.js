@@ -98,18 +98,11 @@ function Home() {
             return (
               <Grid item xs={12} key={key}>
                 <Card 
-                  onClick={() => {
-                    history.push(`/post/${value.id}`)
-                  }}
+                  
                   className={classes.root} 
                   elevation={3}>
                   <CardHeader
                     className={classes.header}
-                    action={
-                      <IconButton>
-                        <DeleteOutlined />
-                      </IconButton>
-                    }
                     avatar={
                       <Avatar 
                         alt="photo profile" 
@@ -146,6 +139,9 @@ function Home() {
                       {value.Likes.length}
                     </Typography>
                     <Button 
+                      onClick={() => {
+                        history.push(`/post/${value.id}`)
+                      }}
                       href="#text-buttons" 
                       size="small"
                       >
