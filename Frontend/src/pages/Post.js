@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios"; // Facilite les requêtes API
 import { AuthContext } from "../helpers/AuthContext";
-import { DeleteOutlined } from '@material-ui/icons';
+import { DeleteOutlined } from "@material-ui/icons";
 
 function Post() {
     let {id} = useParams();
@@ -89,8 +89,10 @@ function Post() {
                 <Card.Title as="h6">{postObject.title}</Card.Title> 
                 <Card.Text>{postObject.content}</Card.Text>
                 <footer>
-                  {postObject.userId}
-                  {authState.userId === postObject.userId && (
+                  
+                 
+                  
+                  {authState.id === postObject.UserId && (
                   <button 
                     className="btn btn-default btn-lg"
                     onClick={() => {

@@ -4,7 +4,7 @@ import {Navbar, Nav} from "react-bootstrap";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from "@material-ui/core/Avatar";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
@@ -61,7 +61,7 @@ function App() {
                         width= "50"
                         height= "50"
                         className="d-inline-block align-top"
-              />{' '}
+              />{" "}
                       Groupomania</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end mx-3">

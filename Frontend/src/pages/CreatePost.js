@@ -1,9 +1,9 @@
 import React, { useEffect, useState} from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { Button, TextField, makeStyles, Container, IconButton, Typography} from '@material-ui/core';
+import { Button, TextField, makeStyles, Container, IconButton, Typography} from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
-import SendIcon from '@material-ui/icons/Send';
+import SendIcon from "@material-ui/icons/Send";
 
 
 const useStyles = makeStyles({
@@ -39,11 +39,13 @@ function  CreatePost() {
     }
 
     if (title && content) {
-      axios.post("http://localhost:3001/posts",{
+      
+      let data = new FormData(e.target)
+      data.append("post", JSON.stringify({
         title: title,
         content: content,
-        url: url,
-      },
+      }))
+      axios.post("http://localhost:3001/posts", data, 
       {
         headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } 
       }
@@ -74,9 +76,10 @@ function  CreatePost() {
               Publication :
           </Typography>
 
-          <form noValidate onSubmit={(e) =>{handleSubmit(e)}}>
+          <form onSubmit={(e) =>{handleSubmit(e)}}>
               <TextField 
                 onChange={(e) => setTitle(e.target.value)}
+                
                 id="title"
                 className={classes.field} 
                 label="Titre" 
@@ -88,6 +91,7 @@ function  CreatePost() {
               />
               <TextField
                 onChange={(e) => setContent(e.target.value)} 
+                
                 id="content"
                 className={classes.field}
                 label="Quoi de neuf?"
@@ -101,6 +105,7 @@ function  CreatePost() {
               <div>
                 <input
                   accept="image/*"
+                  name="image"
                   style={{ display: "none", }}
                   id="contained-button-file"
                   multiple
