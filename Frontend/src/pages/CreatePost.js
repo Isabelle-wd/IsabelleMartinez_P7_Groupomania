@@ -38,7 +38,11 @@ function  CreatePost() {
     }
 
     if (title && content) {
-      console.log(title, content)
+      axios.post("http://localhost:3001/posts",
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } 
+      }
+      )
     }
   }
   
@@ -54,7 +58,7 @@ function  CreatePost() {
  
         
 /* 
-        onSubmit: (data) => {
+    const onSubmit: (data) => {
             axios.post("http://localhost:3001/posts", data,
 		)
             .then(() => {

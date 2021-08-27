@@ -50,7 +50,7 @@ router.delete("/:postId", auth, async (req, res) => {
     },
   });
 
-  res.json("DELETED SUCCESSFULLY");
+  res.json("supprimé!");
 });
 
 module.exports = router;
