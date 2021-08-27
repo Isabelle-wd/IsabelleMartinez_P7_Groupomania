@@ -48,13 +48,13 @@ function Post() {
           if (response.data.error) {
             console.log(response.data.error);
           } else {
-          const commentToAdd = { 
-            message: newComment,
-            username: response.data.username,
-          };
-          setComments([...comments, commentToAdd]);
-          setNewComment("");
-        }
+              const commentToAdd = { 
+                message: newComment,
+                username: response.data.username,
+              };
+              setComments([...comments, commentToAdd]);
+              setNewComment("");
+          }
       });
     };
 
@@ -90,15 +90,16 @@ function Post() {
                 <Card.Text>{postObject.content}</Card.Text>
                 <footer>
                   {postObject.userId}
-                  {authState.username === postObject.username && (
-                  <Button 
-                    variant="danger"
+                  {authState.userId === postObject.userId && (
+                  <button 
+                    className="btn btn-default btn-lg"
                     onClick={() => {
                       deletePost(postObject.id);
                     }}
                   >
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                  </Button> 
+                    {" "}
+                    <DeleteOutlined fontSize="small" />
+                  </button> 
                   )}
                 </footer>
               </Card.Body>               
@@ -106,46 +107,48 @@ function Post() {
           </Container>
 
           <Container>
-          <div className="Comments">
-            <form className="addComment">
-              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Control 
-                  as="textarea" 
-                  placeholder="Votre commentaire" 
-                  value= {newComment}
-                  rows={2} 
-                  style={{ width: "600px" }} 
-                  onChange={(event) => {
-                    setNewComment(event.target.value)
-                  }}
-                />
-              </Form.Group>
-              <Button 
-                variant="primary" 
-                type="submit" 
-                onClick={addComment}
-              >Ajouter
-              </Button>  
-            </form>
-          </div>
+            <div className="Comments">
+              <form className="addComment">
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Control 
+                    as="textarea" 
+                    placeholder="Votre commentaire" 
+                    value= {newComment}
+                    rows={2} 
+                    style={{ width: "600px" }} 
+                    onChange={(event) => {
+                      setNewComment(event.target.value)
+                    }}
+                  />
+                </Form.Group>
+                <Button 
+                  variant="primary" 
+                  type="submit" 
+                  onClick={addComment}
+                >Ajouter
+                </Button>  
+              </form>
+            </div>
           </Container>
 
           <div className="listOfComments">
             {comments.map((comment, key) => {
               return (
                 <Card className="mt-3" style={{ width: "600px" }}>
-                <Card.Body>
-                  <Card.Title> {comment.userId} </Card.Title>
-                  <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
-                    {authState.username === comment.username && (
-                      <button 
-                        onClick={deleteComment} 
-                        type="button" 
-                        className="btn btn-default btn-lg">
-                        <DeleteOutlined />
-                      </button>
-                  )}
-                </Card.Body>
+                  <Card.Body>
+                    <Card.Title> {comment.userId} </Card.Title>
+                    <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
+                      {authState.userId === comment.userId && (
+                        <button 
+                          onClick={() => {
+                            deleteComment(comment.id);
+                          }}
+                          type="button" 
+                          className="btn btn-default btn-lg">
+                          <DeleteOutlined fontSize="small" />
+                        </button>
+                    )}
+                  </Card.Body>
                 </Card>
               )
             })}

@@ -97,7 +97,12 @@ function Home() {
 
             return (
               <Grid item xs={12} key={key}>
-                <Card className={classes.root} elevation={3}>
+                <Card 
+                  onClick={() => {
+                    history.push(`/post/${value.id}`)
+                  }}
+                  className={classes.root} 
+                  elevation={3}>
                   <CardHeader
                     className={classes.header}
                     action={
@@ -143,9 +148,7 @@ function Home() {
                     <Button 
                       href="#text-buttons" 
                       size="small"
-                      onClick={() => {
-                        history.push(`/post/${value.id}`)
-                      }}>
+                      >
                       Commenter
                     </Button>
                   </CardActions>                  

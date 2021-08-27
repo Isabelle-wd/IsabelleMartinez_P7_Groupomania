@@ -6,15 +6,15 @@ import { PhotoCamera } from "@material-ui/icons";
 import SendIcon from '@material-ui/icons/Send';
 
 
-const useStyles = makeStyles((theme) =>({
+const useStyles = makeStyles({
   field: {
     marginTop: 20,
     marginBottom: 20,
     display: "block",
     backgroundColor: "white",
     minWidth: 345,
-  }  
-}));
+  }
+});
 
 function  CreatePost() {
   const classes = useStyles();
@@ -44,15 +44,6 @@ function  CreatePost() {
   
   let history = useHistory();
 
-  const initialValues = {
-    title: "",
-    content: "",
-    url: "",
-  };
-  
-
-  
-
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       history.push("/login");
@@ -78,7 +69,7 @@ function  CreatePost() {
             variant="h6"
             component="h2"
             gutterBottom>
-              Quoi de neuf?
+              Publication :
           </Typography>
 
           <form noValidate onSubmit={(e) =>{handleSubmit(e)}}>
@@ -97,7 +88,7 @@ function  CreatePost() {
                 onChange={(e) => setContent(e.target.value)} 
                 id="content"
                 className={classes.field}
-                label="Votre contenu"
+                label="Quoi de neuf?"
                 variant="outlined" 
                 multiline  
                 rows={5}            
@@ -115,21 +106,19 @@ function  CreatePost() {
                 />
                 <label htmlFor="contained-button-file">
                   <IconButton  
-                    color="action" 
+                    color="secondary" 
                     aria-label="upload picture" 
                     component="span">
                     <PhotoCamera fontSize="large" />
                   </IconButton>
                 </label>
               </div>
-              <Button
-                className={classes.button} 
+              <Button 
                 type="submit"
                 variant="contained"
                 color="primary"
                 size="small"
-                endIcon={ <SendIcon />}                  
-                onClick={CreatePost}              
+                endIcon={ <SendIcon />}                                               
                 >Publier                
               </Button>
           </form>

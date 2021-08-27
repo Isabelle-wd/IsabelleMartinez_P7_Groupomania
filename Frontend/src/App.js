@@ -12,7 +12,6 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import { NoMatch } from "./pages/NoMatch";
-import { Layout } from "./components/Layout";
 
 import { AuthContext } from "./helpers/AuthContext";
 
@@ -75,7 +74,7 @@ function App() {
                       ) : (     
                       <>               
                       <Avatar alt="bla" src="images/profile_pic.png"></Avatar>
-                      <Nav.Link href="/Profile" class="text-white mt-2 ms-2">{authState.username}</Nav.Link>
+                      <Nav.Link href="/Profile" className="text-white mt-2 ms-2">{authState.username}</Nav.Link>
                       <Nav.Link href="/CreatePost">Créer une publication</Nav.Link>    
                       </>                      
                       )}                     

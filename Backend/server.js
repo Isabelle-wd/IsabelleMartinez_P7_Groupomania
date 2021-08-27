@@ -17,7 +17,7 @@ const commentsRouter = require("./routes/Comments");
 app.use("/comments", commentsRouter);
 
 const usersRouter = require("./routes/Users");
-app.use("/Auth", usersRouter);
+app.use("/auth/login", usersRouter);
 
 const likesRouter = require("./routes/Likes");
 app.use("/likes", likesRouter);
