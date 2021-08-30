@@ -18,7 +18,7 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: "75%",
+    flexGrow: 1,
   },
   media: {
     height: 0,
@@ -89,16 +89,15 @@ function Home() {
     };
 
   return (  
-      <Container>
-        <Grid container spacing={6}>
+    <div className={classes.root}>
+        <Grid container xs={12} spacing={6}>
           {listOfPosts
             ? listOfPosts.map((value, key) => {
 
             return (
               <Grid item xs={12} key={key}>
-                <Card 
-                  
-                  className={classes.root} 
+                <Card                   
+                   
                   elevation={3}>
                   <CardHeader
                     className={classes.header}
@@ -153,7 +152,7 @@ function Home() {
           })
           : "loading..."}   
         </Grid>  
-      </Container>
+        </div>
   )        
 }
 
