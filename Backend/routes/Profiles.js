@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { Profiles } = require("../models");
+const { Users } = require("../models");
 
 router.get("/basicinfo/:id", async (req, res) => {
     const id = req.params.id;
   
-    const basicInfo = await Profiles.findByPk(id);
+    const basicInfo = await Users.findByPk(id);
   
     res.json(basicInfo);
   });

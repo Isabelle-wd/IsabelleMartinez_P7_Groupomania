@@ -20,7 +20,6 @@ function  CreatePost() {
   const classes = useStyles();
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
-  const [url, setUrl] = useState("")
   const [titleError, setTitleError] = useState(false)
   const [contentError, setContentError] = useState(false)
 
@@ -78,8 +77,7 @@ function  CreatePost() {
 
           <form onSubmit={(e) =>{handleSubmit(e)}}>
               <TextField 
-                onChange={(e) => setTitle(e.target.value)}
-                
+                onChange={(e) => setTitle(e.target.value)}               
                 id="title"
                 className={classes.field} 
                 label="Titre" 
@@ -90,8 +88,7 @@ function  CreatePost() {
 
               />
               <TextField
-                onChange={(e) => setContent(e.target.value)} 
-                
+                onChange={(e) => setContent(e.target.value)}                
                 id="content"
                 className={classes.field}
                 label="Quoi de neuf?"
