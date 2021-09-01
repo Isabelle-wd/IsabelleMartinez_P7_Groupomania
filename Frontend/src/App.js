@@ -74,7 +74,7 @@ function App() {
                       ) : (     
                       <>               
                       <Avatar alt="photo utilisateur" src="images/profile_pic.png"></Avatar>
-                      <Nav.Link href="/Profile" className="text-white mt-2 ms-2">{authState.username}</Nav.Link>
+                      <Nav.Link href="/Profile/:id" className="text-white mt-2 ms-2">{authState.username}</Nav.Link>
                       <Nav.Link href="/CreatePost">Créer une publication</Nav.Link>    
                       </>                      
                       )}                     
@@ -84,16 +84,15 @@ function App() {
               </Navbar>
    
               <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route path="/CreatePost" component={CreatePost}/>
-                <Route path="/Post/:id" component={Post}/>
-                <Route path="/Signup" component={Signup}/>
-                <Route path="/Login" component={Login}/>
-                <Route path="/Profile" component={Profile}/>
-                <Route component={NoMatch}/>
+                <Route path="/" exact component={Home}/>
+                <Route path="/CreatePost" exact component={CreatePost}/>
+                <Route path="/Post/:id" exact component={Post}/>
+                <Route path="/Signup" exact component={Signup}/>
+                <Route path="/Login" exact component={Login}/>
+                <Route path="/Profile/:id" exact component={Profile}/>
+                <Route path="*" exact component={NoMatch}/>
               </Switch> 
-            </Router>
-           
+            </Router>          
         </AuthContext.Provider>    
       </div>
     );
