@@ -74,7 +74,7 @@ function App() {
                       ) : (     
                       <>               
                       <Avatar alt="photo utilisateur" src="images/profile_pic.png"></Avatar>
-                      <Nav.Link href="/Profile/:id" className="text-white mt-2 ms-2">{authState.username}</Nav.Link>
+                      <Nav.Link href="/Profile/:id" className="text-white ms-2">{authState.username}</Nav.Link>
                       <Nav.Link href="/CreatePost">Créer une publication</Nav.Link>    
                       </>                      
                       )}                     

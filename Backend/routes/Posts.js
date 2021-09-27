@@ -4,6 +4,7 @@ const { Posts, Likes } = require("../models");
 const multer = require("../middleware/multer-config")
 const auth = require("../middleware/auth");
 
+// Création d'un post
 router.post("/", auth, multer, async (req, res) => {
   try {
     const post = JSON.parse(req.body.post);
@@ -19,6 +20,7 @@ router.post("/", auth, multer, async (req, res) => {
       };
 });
 
+// Voir tous les posts
 router.get("/", auth, async (req, res) => {
   try {
     const listOfPosts = await Posts.findAll({ include: [Likes] });
@@ -30,6 +32,7 @@ router.get("/", auth, async (req, res) => {
   };
 });
 
+// Cliquer sur un post
 router.get("/getOnePost/:id", auth, async (req, res) => {
   try {
     const id = req.params.id;
@@ -42,6 +45,23 @@ router.get("/getOnePost/:id", auth, async (req, res) => {
   };
 });
 
+// Liste des posts d'un utilisateur dans son profil
+router.get("/getUserPosts/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const listOfPosts = await Posts.findAll({
+      where: { UserId: id },
+      include: [ Likes ],
+    });
+    res.json(listOfPosts);
+  }
+  catch (error) { 
+    res.status(500).send()
+    console.error(error);
+  };
+});
+
+// Supprimer un post
 router.delete("/:postId", auth, async (req, res) => {
   const postId = req.params.postId;
   await Posts.destroy({

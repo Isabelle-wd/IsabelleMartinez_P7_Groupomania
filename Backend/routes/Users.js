@@ -61,6 +61,7 @@ router.get("/auth", auth, (req, res) => {
     res.json(req.user);
 });
 
+// Profile
 router.get("/basicinfo/:id", async (req, res) => {
     const id = req.params.id;
   

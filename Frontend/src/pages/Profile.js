@@ -6,16 +6,32 @@ function Profile() {
   let { id } = useParams();
   let history = useHistory();
   const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [bio, setBio] = useState("");
   const [listOfPosts, setListOfPosts] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
-      setUsername(response.data.username);
-    });
+    axios
+      .get(`http://localhost:3001/auth/basicinfo/${id}`
+  )
+      .then((response) => {
+        setUsername(response.data);
+        setFullName(response.data);
+        setBio(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-    axios.get(`http://localhost:3001/posts/byuserId/${id}`).then((response) => {
-      setListOfPosts(response.data);
-    });
+    axios.get(`http://localhost:3001/posts/getUserPosts/${id}`, {        
+      headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
+    })
+      .then((response) => {
+        setListOfPosts(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -24,6 +40,8 @@ function Profile() {
       <div className="basicInfo">
         {" "}
         <h1> Username: {username} </h1>
+        <h2> Full Name: {fullName} </h2>
+        <div> Bio: {bio} </div>
       </div>
       <div className="listOfPosts">
         {listOfPosts.map((value, key) => {
