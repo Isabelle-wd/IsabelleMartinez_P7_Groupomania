@@ -45,7 +45,7 @@ function Navbar() {
 
   
     return (
-      <div className="App">       
+        <div className="App">       
             <Router>              
                <nav className="navbar">
                     <div className="navbar-container">
@@ -58,50 +58,50 @@ function Navbar() {
                          <div className="menu-icon" onClick={handleClick}>
                             <i className={click ? "fas fa-times" : "fas fa-bars"} />
                         </div>  
-                    <AuthContext.Provider value={{ authState, setAuthState }}> 
-                        <ul className="nav-menu">         
-                            {!authState.status ? (
-                            <>
-                                <li className="nav-item">
-                                    <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-                                        Accueil
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
-                                        Connexion
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/signup" className="nav-links" onClick={closeMobileMenu}>
-                                        Inscription
-                                    </Link>
-                                </li>
-                            </>
-                        ) : (     
-                            <>               
-                                <li className="nav-item">
-                                    <Link to="/profile/:id" className="nav-links" onClick={closeMobileMenu}>
-                                        <Avatar alt="photo utilisateur" src="images/profile_pic.png">{authState.username}</Avatar>
-                                    </Link>
-                                </li>
-    			                <li className="nav-item">
-                                    <Link to="/createPost" className="nav-links" onClick={closeMobileMenu}>
-                            	        <span class="material-icons-outlined"></span>
-                                    </Link>   
-                                </li>   
-                            </>                      
-                        )}                     
-                        {authState.status && 
-			                    <li className="nav-item" onClick={logout}>
-			                        <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-                                        Deconnexion
-                                    </Link>
-			                    </li>} 
-                        </ul>
-                    </AuthContext.Provider> 
-                </div>
-            </nav>
+                        <AuthContext.Provider value={{ authState, setAuthState }}> 
+                            <ul className="nav-menu">         
+                                {!authState.status ? (
+                                <>
+                                    <li className="nav-item">
+                                        <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                                            Accueil
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
+                                            Connexion
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/signup" className="nav-links" onClick={closeMobileMenu}>
+                                            Inscription
+                                        </Link>
+                                    </li>
+                                </>
+                                ) : (     
+                                <>               
+                                    <li className="nav-item">
+                                        <Link to="/profile/:id" className="nav-links" onClick={closeMobileMenu}>
+                                            <Avatar alt="photo utilisateur" src="images/profile_pic.png">{authState.username}</Avatar>
+                                        </Link>
+                                    </li>
+    			                    <li className="nav-item">
+                                        <Link to="/createPost" className="nav-links" onClick={closeMobileMenu}>
+                                	        <span class="material-icons-outlined"></span>
+                                        </Link>   
+                                    </li>   
+                                </>                      
+                                )}                     
+                                {authState.status && 
+			                        <li className="nav-item" onClick={logout}>
+			                            <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                                            Deconnexion
+                                        </Link>
+			                        </li>} 
+                            </ul>
+                        </AuthContext.Provider> 
+                    </div>
+                </nav>
             </Router>          
         </div>
     );
