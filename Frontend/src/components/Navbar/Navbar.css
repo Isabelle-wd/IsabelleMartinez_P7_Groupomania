@@ -54,8 +54,7 @@
     display: none;
   }
   
-  @media screen and (max-width: 960px) {
-    
+  @media screen and (max-width: 960px) {  
     .nav-menu {
       display: flex;
       flex-direction: column;
@@ -107,31 +106,22 @@
   }
 
   @media only screen and (max-width: 600px) {
-
     img {
       width: 300px;
     }
-   
-  
   }
 
   @media only screen and (max-width: 480px) {
-
     img {
       width: 250px;
     }
     .fa-bars {
       font-size: smaller;
     }
-   
   }
   
   @media only screen and (max-width: 360px) {
-
     img {
       width: 200px;
     }
-    
-   
-  
   }
