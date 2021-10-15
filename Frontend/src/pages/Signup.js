@@ -140,8 +140,7 @@ function Signup() {
                 
           </form>
         </div>
-        )
-    )    
+      
       </Container>
     )
 }

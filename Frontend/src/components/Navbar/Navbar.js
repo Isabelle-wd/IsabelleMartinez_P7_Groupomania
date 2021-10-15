@@ -59,7 +59,7 @@ function Navbar() {
                             <i className={click ? "fas fa-times" : "fas fa-bars"} />
                         </div>  
                         <AuthContext.Provider value={{ authState, setAuthState }}> 
-                            <ul className="nav-menu">         
+                            <ul className={click ? "nav-menu active" : "nav-menu" }>         
                                 {!authState.status ? (
                                 <>
                                     <li className="nav-item">
