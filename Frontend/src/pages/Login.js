@@ -33,7 +33,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const {setAuthState} = useContext(AuthContext);
   
-
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }

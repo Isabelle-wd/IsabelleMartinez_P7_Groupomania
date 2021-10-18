@@ -28,6 +28,7 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
     try{
         const {username, password} = req.body;
+        console.log(username, password);
         const user = await Users.findOne({
             where: {username: username}
         });
@@ -63,6 +64,7 @@ router.get("/auth", auth, (req, res) => {
 
 // Profile
 router.get("/basicinfo/:id", async (req, res) => {
+    console.log(user);
     const id = req.params.id;
   
     const basicInfo = await Users.findByPk(id, {

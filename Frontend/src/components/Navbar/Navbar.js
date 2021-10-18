@@ -81,7 +81,7 @@ function Navbar() {
                                 ) : (     
                                 <>               
                                     <li className="nav-item">
-                                        <Link to="/profile/:id" className="nav-links" onClick={closeMobileMenu}>
+                                        <Link to="/basicinfo/:id" className="nav-links" onClick={closeMobileMenu}>
                                             <Avatar alt="photo utilisateur" src="images/profile_pic.png">{authState.username}</Avatar>
                                         </Link>
                                     </li>
