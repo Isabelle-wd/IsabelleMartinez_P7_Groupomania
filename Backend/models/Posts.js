@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         });
         Posts.hasMany(models.Likes, {
             onDelete: "cascade",
-          });
+        });
     };
     return Posts;
 }; 

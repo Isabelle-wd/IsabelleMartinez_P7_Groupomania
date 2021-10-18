@@ -1,7 +1,7 @@
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
@@ -15,6 +15,7 @@ function App() {
       <div className="App">         
             <Router>              
             <Navbar />
+            
               <Switch>
                 <Route path="/" exact component={Home}/>
                 <Route path="/CreatePost" exact component={CreatePost}/>
