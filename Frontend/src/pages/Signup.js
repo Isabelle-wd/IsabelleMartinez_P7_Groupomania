@@ -51,8 +51,6 @@ function Signup() {
           .required(), 
     });
 
-   
-
     let history = useHistory();
 
     const formik = useFormik({
@@ -60,8 +58,7 @@ function Signup() {
             email: "",
             username: "",
             password: "",
-        },  
-        
+        },         
         validationSchema: validationSchema,
         onSubmit: (data) => {
             axios.post("http://localhost:3001/auth", data)
@@ -92,8 +89,7 @@ function Signup() {
                   name="username"
                   autoComplete="username"
                   value={formik.values.username}
-                  onChange={formik.handleChange}
-                  
+                  onChange={formik.handleChange}                 
                 />
               </Grid>
               <Grid item xs={12}>
@@ -136,11 +132,9 @@ function Signup() {
               className={classes.submit}
             >
               Je m'inscrit
-            </Button>
-                
+            </Button>               
           </form>
-        </div>
-      
+        </div>     
       </Container>
     )
 }

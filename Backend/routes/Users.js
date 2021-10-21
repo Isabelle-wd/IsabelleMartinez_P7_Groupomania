@@ -63,7 +63,7 @@ router.get("/auth", auth, (req, res) => {
 });
 
 // Profile
-router.get("/basicinfo/:id", async (req, res) => {
+/* router.get("/basicinfo/:id", async (req, res) => {
     console.log(user);
     const id = req.params.id;
   
@@ -72,6 +72,6 @@ router.get("/basicinfo/:id", async (req, res) => {
     });
   
     res.json(basicInfo);
-  });
+  }); */
 
 module.exports = router;

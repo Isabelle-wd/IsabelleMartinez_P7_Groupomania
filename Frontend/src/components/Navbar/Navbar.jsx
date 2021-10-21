@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+/* import React, { useState, useEffect } from "react";
 import './Navbar.css';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
-//import PostAddIcon from '@mui/icons-material/PostAdd';
+import CreatePostModal from "../CreatePostModal";
 
 import { AuthContext } from "../../helpers/AuthContext";
 
@@ -11,6 +11,7 @@ function Navbar() {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
+    const [modalOpen, setModalOpen] = useState(false);
 
   const [authState, setAuthState] = useState({
     username:"", 
@@ -85,17 +86,22 @@ function Navbar() {
                                             <Avatar alt="photo utilisateur" src="images/profile_pic.png">{authState.username}</Avatar>
                                         </Link>
                                     </li>
-    			                    <li className="nav-item">
-                                        <Link to="/createPost" className="nav-links" onClick={closeMobileMenu}>
-                                	        <span class="material-icons-outlined"></span>
-                                        </Link>   
+    			                          <li className="nav-item">
+                                        <Link to="/createPost" className="nav-links openModalLink" 
+                                          onClick={() => {
+                                            closeMobileMenu();
+                                            setModalOpen(true);
+                                          }}>
+                                          <i class="fas fa-plus-square"></i>
+                                        </Link>
+                                        {modalOpen && <CreatePostModal setOpenModal={setModalOpen} />}   
                                     </li>   
                                 </>                      
                                 )}                     
                                 {authState.status && 
 			                        <li className="nav-item" onClick={logout}>
 			                            <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-                                            Deconnexion
+                                            Déconnexion
                                         </Link>
 			                        </li>} 
                             </ul>
@@ -107,4 +113,4 @@ function Navbar() {
     );
   }
 
-export default Navbar;
+export default Navbar; */

@@ -1,4 +1,4 @@
-/* import React, { useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Button, TextField, makeStyles, Container, IconButton, Typography} from "@material-ui/core";
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   }
 });
 
-function  CreatePost() {
+function  CreatePostModal() {
   const classes = useStyles();
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
@@ -130,4 +130,4 @@ function  CreatePost() {
   );
 }
 
-export default CreatePost; */
+export default CreatePostModal;

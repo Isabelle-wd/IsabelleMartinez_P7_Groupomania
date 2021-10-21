@@ -92,7 +92,7 @@ function Home() {
 
   return (  
     <Container>
-    <Grid container spacing={6}>
+      <Grid container spacing={6}>
           {listOfPosts
             ? listOfPosts.map((value, key) => {
             return (
@@ -150,8 +150,8 @@ function Home() {
             );
           })
           : "loading..."}   
-        </Grid>  
-        </Container>
+      </Grid>  
+    </Container>
   )        
 }
 

@@ -1,9 +1,10 @@
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Navbar from "./components/Navbar/Navbar";
+import AppBar from "./components/AppBar"
 import Home from "./pages/Home";
-import CreatePost from "./pages/CreatePost";
+import CreatePostModal from "./components/CreatePostModal";
 import Post from "./pages/Post";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -14,15 +15,15 @@ function App() {
     return (
       <div className="App">         
             <Router>              
-            <Navbar />
+            <AppBar />
             
               <Switch>
                 <Route path="/" exact component={Home}/>
-                <Route path="/CreatePost" exact component={CreatePost}/>
+                <Route path="/CreatePost" exact component={CreatePostModal}/>
                 <Route path="/Post/:id" exact component={Post}/>
                 <Route path="/Signup" exact component={Signup}/>
                 <Route path="/Login" exact component={Login}/>
-                <Route path="/Profile/:id" exact component={Profile}/>
+                <Route path="/basicinfo/:id" exact component={Profile}/>
                 <Route path="*" exact component={NoMatch}/>
               </Switch> 
             </Router>                     

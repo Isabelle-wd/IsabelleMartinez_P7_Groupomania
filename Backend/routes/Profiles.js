@@ -1,4 +1,4 @@
-/* const express = require("express");
+const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
 
@@ -12,4 +12,4 @@ router.get("/basicinfo/:id", async (req, res) => {
     res.json(basicInfo);
   });
 
-module.exports = router; */
+module.exports = router;
