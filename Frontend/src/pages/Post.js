@@ -88,7 +88,8 @@ function Post() {
               <Card.Body>
                 <Card.Title as="h6">{postObject.title}</Card.Title> 
                 <Card.Text>{postObject.content}</Card.Text>
-                <footer>                  
+                <Card.Footer>     
+                  {postObject.id}             
                   {authState.id === postObject.UserId && (
                   <button 
                     className="btn btn-default btn-lg"
@@ -100,7 +101,7 @@ function Post() {
                     <DeleteOutlined fontSize="small" />
                   </button> 
                   )}
-                </footer>
+                </Card.Footer>
               </Card.Body>               
             </Card>
           </Container>

@@ -8,10 +8,13 @@ function Profile() {
   const [username, setUsername] = useState("");
   const [listOfPosts, setListOfPosts] = useState([]);
 
+  //console.log(id);
+
   useEffect(() => {
     axios
       .get(`http://localhost:3001/auth/basicinfo/${id}`)
       .then((response) => {
+        console.log(response);
         setUsername(response.data.username);
       })
       .catch((error) => {

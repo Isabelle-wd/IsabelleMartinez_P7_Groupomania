@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Avatar, Button, Box, CssBaseline, TextField, makeStyles, Container, Typography} from '@material-ui/core';
+import { Avatar, Button, CssBaseline, TextField, makeStyles, Container, Typography} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
@@ -31,7 +31,7 @@ function Login() {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const {setAuthState} = useContext(AuthContext);
+  const [authState, setAuthState] = useState(AuthContext);
   
   function validateForm() {
     return username.length > 0 && password.length > 0;
@@ -118,9 +118,7 @@ let history = useHistory();
           
         </form>
       </div>
-      <Box mt={8}>
-        
-      </Box>
+      
     </Container>
   );
 }
