@@ -4,7 +4,6 @@
   padding: 0;
   font-family: "Montserrat Alternates", sans-serif;
 }
-
 .logo-container {
   height: 100vh;
   width: 100%;
@@ -23,4 +22,27 @@
   background: linear-gradient(90deg, rgba(18, 36, 65, 1) 0%, rgba(253,45,1,1) 35%, rgba(255,208,206,1) 100%);
 }
 
+@media only screen and (max-width: 760px) {
+  .nav-item {
+    font-weight: bold;
+    color: white !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  img {
+    width: 300px;
+  }
+  
+}
 
+@media only screen and (max-width: 480px) {
+  img {
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  img {
+    width: 200px;
+  }
+}

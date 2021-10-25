@@ -42,36 +42,34 @@ function AppBar() {
       };
 
       return (
-        <Navbar bg="myColor" variant="dark" expand="lg" fixed="top" className="mb-5">           
+        <Navbar bg="myColor" expand="md" sticky="top" >           
         <Container>
-          <Navbar.Brand href="#home">
-            <a className="navbar-brand" href="/">
-              <img
-                alt="logo"
-                src= "images/icon-left-font-monochrome-white.svg"                       
-                width="350"
-                className="icon-logo"           
-              />
-            </a>
+          <Navbar.Brand href="/">
+            <img
+              alt="logo"
+              src= "images/icon-left-font-monochrome-white.svg"                       
+              width="350"
+              className="icon-logo"           
+            />
           </Navbar.Brand>
           <AuthContext.Provider value={{ authState, setAuthState }}>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+              <Nav>
               {!authState.status ? (
                 <>
-                  <Nav.Link href="/">Accueil</Nav.Link>
-                  <Nav.Link href="/login">Connexion</Nav.Link>
-                  <Nav.Link href="/signup">Inscription</Nav.Link>
+                  <Nav.Link className="nav-item" href="/">Accueil</Nav.Link>
+                  <Nav.Link className="nav-item" href="/login">Connexion</Nav.Link>
+                  <Nav.Link className="nav-item" href="/signup">Inscription</Nav.Link>
                 </>
                 ) : ( 
                 <>
                   <Nav.Link href="/basicinfo/:id" className="me-5 d-flex">
                     <Avatar alt="photo utilisateur" src="images/profile_pic.png" className="me-2"></Avatar>
-                    <Navbar.Text>{authState.username}</Navbar.Text>
+                    <Navbar.Text className="nav-item">{authState.username}</Navbar.Text>
                   </Nav.Link>
-                  <Nav.Link 
-                    className="me-3 mt-2"
+                  <Nav.Link                     
+                    className="me-3 mt-2 nav-item"
                     href="/createPost"
                     onClick={() => {
                       setModalOpen(true);
@@ -84,7 +82,7 @@ function AppBar() {
                 <Nav.Link 
                   href="/" 
                   onClick={logout} 
-                  className="mt-2">
+                  className="mt-2 nav-item">
                     Déconnexion
                 </Nav.Link>
                 }
@@ -93,6 +91,7 @@ function AppBar() {
           </AuthContext.Provider>
         </Container>        
       </Navbar>
+      
     );
   }
       
