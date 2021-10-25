@@ -6,18 +6,13 @@ function Profile() {
   let { id } = useParams();
   let history = useHistory();
   const [username, setUsername] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [bio, setBio] = useState("");
   const [listOfPosts, setListOfPosts] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/auth/basicinfo/${id}`
-  )
+      .get(`http://localhost:3001/auth/basicinfo/${id}`)
       .then((response) => {
-        setUsername(response.data);
-        setFullName(response.data);
-        setBio(response.data);
+        setUsername(response.data.username);
       })
       .catch((error) => {
         console.error(error);
@@ -40,8 +35,6 @@ function Profile() {
       <div className="basicInfo">
         {" "}
         <h1> Username: {username} </h1>
-        <h2> Full Name: {fullName} </h2>
-        <div> Bio: {bio} </div>
       </div>
       <div className="listOfPosts">
         {listOfPosts.map((value, key) => {
@@ -70,4 +63,4 @@ function Profile() {
   );
 }
 
-export default Profile
+export default Profile;

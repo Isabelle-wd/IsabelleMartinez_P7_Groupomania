@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+/* import React, { useEffect, useState} from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Button, TextField, makeStyles, Container, IconButton, Typography} from "@material-ui/core";
@@ -130,4 +130,4 @@ function  CreatePostModal() {
   );
 }
 
-export default CreatePostModal;
+export default CreatePostModal; */

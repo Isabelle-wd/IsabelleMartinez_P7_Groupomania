@@ -63,8 +63,7 @@ router.get("/auth", auth, (req, res) => {
 });
 
 // Profile
-/* router.get("/basicinfo/:id", async (req, res) => {
-    console.log(user);
+router.get("/basicinfo/:id", async (req, res) => {
     const id = req.params.id;
   
     const basicInfo = await Users.findByPk(id, {
@@ -72,6 +71,6 @@ router.get("/auth", auth, (req, res) => {
     });
   
     res.json(basicInfo);
-  }); */
+  });
 
 module.exports = router;

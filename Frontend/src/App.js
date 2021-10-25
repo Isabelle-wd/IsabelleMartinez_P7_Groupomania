@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import AppBar from "./components/AppBar"
 import Home from "./pages/Home";
-import CreatePostModal from "./components/CreatePostModal";
+import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -19,7 +19,7 @@ function App() {
             
               <Switch>
                 <Route path="/" exact component={Home}/>
-                <Route path="/CreatePost" exact component={CreatePostModal}/>
+                <Route path="/CreatePost" exact component={CreatePost}/>
                 <Route path="/Post/:id" exact component={Post}/>
                 <Route path="/Signup" exact component={Signup}/>
                 <Route path="/Login" exact component={Login}/>
