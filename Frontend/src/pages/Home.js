@@ -139,7 +139,6 @@ function Home() {
                       onClick={() => {
                         history.push(`/post/${value.id}`)
                       }}
-                      href="#text-buttons" 
                       size="small"
                       >
                       <ChatBubbleOutlineIcon/>
