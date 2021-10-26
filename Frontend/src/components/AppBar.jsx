@@ -4,12 +4,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {Container, Navbar, Nav} from "react-bootstrap";
 import Avatar from "@material-ui/core/Avatar";
-//import CreatePostModal from "../CreatePostModal";
 
 import { AuthContext } from "../helpers/AuthContext";
 
 function AppBar() { 
-    const [modalOpen, setModalOpen] = useState(false); 
     const [authState, setAuthState] = useState({
       username:"", 
       id: 0, 
@@ -71,9 +69,7 @@ function AppBar() {
                   <Nav.Link                     
                     className="me-3 mt-2 nav-item"
                     href="/createPost"
-                    onClick={() => {
-                      setModalOpen(true);
-                    }}>
+                  >
                     <i class="fas fa-plus-square"></i>
                   </Nav.Link>             
                 </>

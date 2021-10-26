@@ -67,7 +67,7 @@ let history = useHistory();
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ m: 2 }}>
+    <Container value={authState} component="main" maxWidth="xs" sx={{ m: 2 }}>
       <CssBaseline />
       <div className={classes.paper} onSubmit={handleSubmit}>
         <Avatar className={classes.avatar}>
