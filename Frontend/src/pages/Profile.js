@@ -5,15 +5,14 @@ import axios from "axios";
 function Profile() {
   let { id } = useParams();
   let history = useHistory();
-  const [username, setUsername] = useState("");
+  const [user, setUser] = useState("");
   const [listOfPosts, setListOfPosts] = useState([]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/auth/basicinfo/${id}`)
       .then((response) => {
-        console.log(response);
-        setUsername(response.data.username);
+        setUser(response.data.username);
       })
       .catch((error) => {
         console.error(error);
@@ -35,7 +34,7 @@ function Profile() {
     <div className="profilePageContainer">
       <div className="basicInfo">
         {" "}
-        <h1> Username: {username} </h1>
+        <h1> Username: {user.username} </h1>
       </div>
       <div className="listOfPosts">
         {listOfPosts.map((value, key) => {

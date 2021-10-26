@@ -3,8 +3,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { PhotoCamera } from "@material-ui/icons";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -78,7 +80,17 @@ function Signup() {
             S'inscrire
           </Typography>
           <form className={classes.form} noValidate>
-            <Grid container spacing={2}>            
+            <Grid container spacing={2}>       
+            <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  name="fullName"
+                  label="Prénom et nom de famille"
+                  type="fullName"
+                  id="fullName"                   
+                />
+              </Grid>       
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -122,7 +134,35 @@ function Signup() {
                   error={formik.touched.password && Boolean(formik.errors.password)}
                   helperText={formik.touched.password && formik.errors.password}   
                 />
-              </Grid>            
+              </Grid>      
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  name="bio"
+                  label="Petite description"
+                  type="text"
+                  id="bio"                   
+                />
+              </Grid>      
+              <Grid item xs={12}>
+                <input
+                  accept="image/*"
+                  name="image"
+                  style={{ display: "none", }}
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                />
+                <label htmlFor="contained-button-file">
+                  <IconButton  
+                    color="secondary" 
+                    aria-label="upload picture" 
+                    component="span">
+                    <PhotoCamera fontSize="large" />
+                  </IconButton>
+                </label>
+              </Grid>        
             </Grid>
             <Button
               type="submit"
