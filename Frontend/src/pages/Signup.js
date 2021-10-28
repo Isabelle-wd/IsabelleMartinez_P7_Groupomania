@@ -38,19 +38,36 @@ const useStyles = makeStyles((theme) => ({
 function Signup() {
     const classes = useStyles();
 
+    const FILE_SIZE = 160 * 1024;
+    const SUPPORTED_FORMATS = [
+      "image/jpg",
+      "image/jpeg",
+      "image/gif",
+      "image/png"
+    ];
+
     const validationSchema = Yup.object().shape({
-        email: Yup.string()
+        email: Yup
+          .string()
           .email("Adresse email non valide")
           .required(),
-        username: Yup.string()
+        username: Yup
+          .string()
           .min(3)
           .max(25)
           .required(),
-        password: Yup.string()
+        password: Yup
+          .string()
           .matches(
             /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
           )
           .required(), 
+        fullName: Yup
+          .string()
+          .max(25),
+        bio: Yup
+          .string()
+          .max(200),
     });
 
     let history = useHistory();
@@ -60,6 +77,8 @@ function Signup() {
             email: "",
             username: "",
             password: "",
+            fullName: "",
+            bio: "",
         },         
         validationSchema: validationSchema,
         onSubmit: (data) => {
@@ -88,7 +107,9 @@ function Signup() {
                   name="fullName"
                   label="Prénom et nom de famille"
                   type="fullName"
-                  id="fullName"                   
+                  id="fullName"         
+                  value={formik.values.fullName}
+                  onChange={formik.handleChange}           
                 />
               </Grid>       
               <Grid item xs={12}>
@@ -142,27 +163,11 @@ function Signup() {
                   name="bio"
                   label="Petite description"
                   type="text"
-                  id="bio"                   
+                  id="bio"       
+                  value={formik.values.bio}
+                  onChange={formik.handleChange}             
                 />
               </Grid>      
-              <Grid item xs={12}>
-                <input
-                  accept="image/*"
-                  name="image"
-                  style={{ display: "none", }}
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                />
-                <label htmlFor="contained-button-file">
-                  <IconButton  
-                    color="secondary" 
-                    aria-label="upload picture" 
-                    component="span">
-                    <PhotoCamera fontSize="large" />
-                  </IconButton>
-                </label>
-              </Grid>        
             </Grid>
             <Button
               type="submit"

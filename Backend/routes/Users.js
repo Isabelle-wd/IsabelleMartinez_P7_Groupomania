@@ -10,7 +10,7 @@ require("dotenv").config();
 // Inscription 
 router.post("/", async (req, res) => {
     try {
-        const { email, username, password, fullName, bio, avatar } = req.body;
+        const { email, username, password, fullName, bio } = req.body;
         let hash = await bcrypt.hash(password, 10);
         Users.create ({
             email: email,
@@ -18,7 +18,6 @@ router.post("/", async (req, res) => {
             password: hash,
             fullName: fullName,
             bio: bio,
-            avatar: avatar,
         });
         res.json("SUCCESS");
     } catch (error) { 

@@ -1,8 +1,8 @@
-import React, {useState, createContext} from 'react'
+import createContext from 'react';
 
-export const AuthContext = createContext()
+export const AuthContext = createContext("");
 
-export const UserProvider = ({children}) => {
+/* export const UserProvider = ({children}) => {
   const [user, setUser] = useState(() => {
     const getUser = localStorage.getItem('user')
     if (getUser) {
@@ -13,5 +13,5 @@ export const UserProvider = ({children}) => {
 
   return <AuthContext.Provider value={[user, setUser]}>{children}</AuthContext.Provider>
 }
-
+ */
 
