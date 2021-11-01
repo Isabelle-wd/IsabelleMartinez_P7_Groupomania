@@ -15,6 +15,8 @@ function Post() {
 
     let history = useHistory();
 
+    console.log(useContext(AuthContext))
+
     useEffect(() => {
         axios
           .get(`http://localhost:3001/posts/getOnePost/${id}`,
@@ -99,9 +101,11 @@ function Post() {
               <Card.Body>
                 <Card.Title as="h6">{postObject.title}</Card.Title> 
                 <Card.Text>{postObject.content}</Card.Text>
-                <Card.Footer>     
-                  {postObject.id}             
-                  {authState.id === postObject.userId && (
+                <Card.Footer> 
+                      
+                  {postObject.userId}
+                  {/* {postObject.id}             
+                  {authState.id === postObject.userId && ( */}
                   <button 
                     className="btn btn-default btn-lg"
                     onClick={() => {
@@ -111,7 +115,7 @@ function Post() {
                     {" "}
                     <DeleteOutlined fontSize="small" />
                   </button> 
-                  )}
+                  {/* )} */}
                 </Card.Footer>
               </Card.Body>               
             </Card>
@@ -149,7 +153,7 @@ function Post() {
                   <Card.Body>
                     <Card.Title> {comment.userId} </Card.Title>
                     <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
-                      {authState.id === comment.UserId && (
+                      {/* {authState.id === comment.UserId && ( */}
                         <button 
                           onClick={() => {
                             deleteComment(comment.id);
@@ -158,7 +162,7 @@ function Post() {
                           className="btn btn-default btn-lg">
                           <DeleteOutlined fontSize="small" />
                         </button>
-                    )}
+                   {/*  )} */}
                   </Card.Body>
                 </Card>
               )
