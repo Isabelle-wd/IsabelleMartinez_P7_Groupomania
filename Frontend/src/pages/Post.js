@@ -1,9 +1,9 @@
 import React from "react";
-import {Card, Container, Form, Button} from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios"; // Facilite les requêtes API
 import { AuthContext } from "../helpers/AuthContext";
+import {Card, Container, Form, Button} from "react-bootstrap";
 import { DeleteOutlined } from "@material-ui/icons";
 
 function Post() {
@@ -16,68 +16,79 @@ function Post() {
     let history = useHistory();
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/posts/getOnePost/${id}`,
-        {
-          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
-        })
-            .then((response) => {
-              setPostObject(response.data);
-            });
+        axios
+          .get(`http://localhost:3001/posts/getOnePost/${id}`,
+            {
+              headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
+            })
+          .then((response) => {
+            setPostObject(response.data);
+          });
 
-        axios.get(`http://localhost:3001/comments/${id}`,
-        {
-          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
-        })
+        axios
+          .get(`http://localhost:3001/comments/${id}`,
+            {
+              headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
+            })
           .then((response) => {
             setComments(response.data);
-        });    
+          });    
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const addComment = (e) => {
       e.preventDefault();
-      axios.post("http://localhost:3001/comments", {
-        message: newComment, 
-        PostId: id
-      },
-      {
-        headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } 
-      }
-      )
-        .then((response) => {
-          if (response.data.error) {
-            console.log(response.data.error);
-          } else {
-              const commentToAdd = { 
-                message: newComment,
-                username: response.data.username,
-              };
-              setComments([...comments, commentToAdd]);
-              setNewComment("");
+      axios
+        .post("http://localhost:3001/comments", 
+          {
+            message: newComment, 
+            PostId: id,
+          },
+          {
+            headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") } 
           }
-      });
+        )
+        .then((response) => {
+          if (response.data.error) 
+            {
+              console.log(response.data.error);
+            } 
+          else {
+            const commentToAdd = { 
+              message: newComment,
+              username: response.data.username,
+            };
+            setComments([...comments, commentToAdd]);
+            setNewComment("");
+          }
+        });
     };
 
     const deleteComment = (id) => {
-      axios.delete(`http://localhost:3001/comments/${id}`, {       
-          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
-        })
+      axios
+        .delete(`http://localhost:3001/comments/${id}`, 
+          {       
+            headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
+          })
         .then(() => {
           setComments(
             comments.filter((val) => {
-              return val.id !== id
+              return val.id !== id;
             })
           );
         });
     };
   
     const deletePost = (id) => {
-      axios.delete(`http://localhost:3001/posts/${id}`, {        
-          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
-        })
-        .then(() => {
-          history.push("/");
-        });
+      axios
+        .delete(`http://localhost:3001/posts/${id}`, 
+          {        
+            headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
+          })
+        .then(() => 
+          {
+            history.push("/");
+          });
     };
 
     return (
@@ -90,7 +101,7 @@ function Post() {
                 <Card.Text>{postObject.content}</Card.Text>
                 <Card.Footer>     
                   {postObject.id}             
-                  {authState.id === postObject.UserId && (
+                  {authState.id === postObject.userId && (
                   <button 
                     className="btn btn-default btn-lg"
                     onClick={() => {

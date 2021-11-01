@@ -3,10 +3,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { PhotoCamera } from "@material-ui/icons";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -37,14 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Signup() {
     const classes = useStyles();
-
-    const FILE_SIZE = 160 * 1024;
-    const SUPPORTED_FORMATS = [
-      "image/jpg",
-      "image/jpeg",
-      "image/gif",
-      "image/png"
-    ];
 
     const validationSchema = Yup.object().shape({
         email: Yup
