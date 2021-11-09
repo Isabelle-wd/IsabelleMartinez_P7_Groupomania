@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios"; 
+import "./../App.css";
+
+import Loading from "../components/Loading";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -90,8 +93,18 @@ function Home() {
       )
     };
 
+    const [isLoading, setIsLoading] = useState(true);
+      useEffect(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2500);
+      })
+
   return (  
     <Container>
+      { isLoading == true?
+      <Loading />
+        :
       <Grid container spacing={6}>
           {listOfPosts
             ? listOfPosts.map((value, key) => {
@@ -150,6 +163,7 @@ function Home() {
           })
           : "loading..."}   
       </Grid>  
+}
     </Container>
   )        
 }
