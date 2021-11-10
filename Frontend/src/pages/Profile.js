@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
-
 function Profile() {
   let { id } = useParams();
   let history = useHistory();
@@ -35,10 +34,10 @@ function Profile() {
     <div className="profilePageContainer">
       <div className="basicInfo">
         {" "}
-        <h1> Pseudo: {user.username} </h1>
-        <h1> Email: {user.email} </h1>
-        <h1> Nom: {user.fullName} </h1>
-        <h1> Bio: {user.bio}</h1>
+        <h1> Pseudo: {user && user.username} </h1>
+        <h1> Email: {user && user.email} </h1>
+        <h1> Nom: {user && user.fullName} </h1>
+        <h1> Bio: {user && user.bio}</h1>
       </div>
       <div className="listOfPosts">
         {listOfPosts.map((value, key) => {
