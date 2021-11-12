@@ -102,7 +102,7 @@ function Home() {
 
   return (  
     <Container>
-      { isLoading == true?
+      { isLoading === true?
       <Loading />
         :
       <Grid container spacing={6}>
@@ -110,7 +110,10 @@ function Home() {
             ? listOfPosts.map((value, key) => {
             return (
               <Grid item xs={12} key={key}>
-                <Card                                      
+                <Card         
+                  onClick={() => {
+                    history.push(`/post/${value.id}`)
+                  }}                             
                   elevation={3}>
                   <CardHeader
                     avatar={
@@ -127,7 +130,11 @@ function Home() {
                     image={value.url}
                   />
                   <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography 
+                      variant="body2" 
+                      color="textSecondary" 
+                      component="p"
+                    >
                       {value.content}
                     </Typography>
                   </CardContent>
@@ -149,9 +156,7 @@ function Home() {
                       {value.Likes.length}
                     </Typography>
                     <Button 
-                      onClick={() => {
-                        history.push(`/post/${value.id}`)
-                      }}
+                      
                       size="small"
                       >
                       <ChatBubbleOutlineIcon/>

@@ -11,11 +11,9 @@ function Post() {
     const [postObject,setPostObject] = useState({});
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    const { authState } = useContext(AuthContext);
+    const [authState, setAuthState] = useContext(AuthContext);
 
     let history = useHistory();
-
-    console.log(useContext(AuthContext))
 
     useEffect(() => {
         axios
@@ -96,16 +94,15 @@ function Post() {
     return (
       <div className="postPage">
           <Container>
-            <Card className="mb-3" style={{ width: "600px" }}>    
+            <Card className="mb-3" style={{ width: "500px" }}>    
               <Card.Img variant="top" src={postObject.url} /> 
               <Card.Body>
                 <Card.Title as="h6">{postObject.title}</Card.Title> 
                 <Card.Text>{postObject.content}</Card.Text>
-                <Card.Footer> 
-                      
-                  {postObject.userId}
-                  {/* {postObject.id}             
-                  {authState.id === postObject.userId && ( */}
+                <Card.Footer>                                       
+                             
+               {/*  {postObject.UserId}  */}         
+                  {authState.id === postObject.UserId && (
                   <button 
                     className="btn btn-default btn-lg"
                     onClick={() => {
@@ -115,7 +112,7 @@ function Post() {
                     {" "}
                     <DeleteOutlined fontSize="small" />
                   </button> 
-                  {/* )} */}
+                  )}
                 </Card.Footer>
               </Card.Body>               
             </Card>
@@ -152,7 +149,12 @@ function Post() {
                 <Card className="mt-3" style={{ width: "600px" }}>
                   <Card.Body>
                     <Card.Title> {comment.userId} </Card.Title>
-                    <Card.Text key={key} className="comment"> {comment.message}</Card.Text>  
+                    <Card.Text 
+                      key={key} 
+                      className="comment"
+                    > 
+                      {comment.message}
+                    </Card.Text>  
                       {/* {authState.id === comment.UserId && ( */}
                         <button 
                           onClick={() => {
