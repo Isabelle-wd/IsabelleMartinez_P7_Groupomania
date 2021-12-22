@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import {Image} from "react-bootstrap";
 
 function Profile() {
   let { id } = useParams();
@@ -10,7 +11,9 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/auth/basicinfo/${id}`)
+      .get(`http://localhost:3001/auth/basicinfo`, {        
+        headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
+      })
       .then((response) => {
         setUser(response.data);
       })
@@ -34,11 +37,13 @@ function Profile() {
     <div className="profilePageContainer">
       <div className="basicInfo">
         {" "}
+        <Image src={user && user.image} rounded />
         <h1> Pseudo: {user && user.username} </h1>
         <h1> Email: {user && user.email} </h1>
         <h1> Nom: {user && user.fullName} </h1>
         <h1> Bio: {user && user.bio}</h1>
       </div>
+
       <div className="listOfPosts">
         {listOfPosts.map((value, key) => {
           return (

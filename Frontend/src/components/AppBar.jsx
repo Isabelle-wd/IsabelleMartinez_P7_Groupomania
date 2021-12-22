@@ -48,7 +48,7 @@ function AppBar() {
           <Navbar.Brand href="/">
             <img
               alt="logo"
-              src= "images/icon-left-font-monochrome-white.svg"                       
+              src= "/images/icon-left-font-monochrome-white.svg"                       
               width="350"
               className="icon-logo"           
             />
@@ -73,7 +73,7 @@ function AppBar() {
                     className="me-3 mt-2 nav-item"
                     href="/createPost"
                   >
-                    <i class="fas fa-plus-square"></i>
+                    <i className="fas fa-plus-square"></i>
                   </Nav.Link>             
                 </>
                 )}

@@ -60,6 +60,7 @@ let history = useHistory();
               id: response.data.id,
               status: true,
             });
+            localStorage.setItem("userId", response.data.id);
             history.push("/");  
           }       
                           

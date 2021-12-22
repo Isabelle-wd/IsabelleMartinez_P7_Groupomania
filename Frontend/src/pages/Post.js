@@ -11,7 +11,7 @@ function Post() {
     const [postObject,setPostObject] = useState({});
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    const [authState, setAuthState] = useContext(AuthContext);
+    const userId = window.localStorage.getItem("userId");
 
     let history = useHistory();
 
@@ -102,7 +102,7 @@ function Post() {
                 <Card.Footer>                                       
                              
                {/*  {postObject.UserId}  */}         
-                  {authState.id === postObject.UserId && (
+                  {userId === postObject.UserId && (
                   <button 
                     className="btn btn-default btn-lg"
                     onClick={() => {
