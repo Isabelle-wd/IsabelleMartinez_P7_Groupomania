@@ -20,13 +20,11 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import Grid from "@material-ui/core/Grid";
 
+
 const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "50%",
-    flexGrow: 1,
-  },
+  
   media: {
-    height: 0,
+    height: "100%",
     paddingTop: "56.25%",
   }, 
 }));
@@ -119,10 +117,10 @@ function Home() {
                     avatar={
                       <Avatar 
                         alt="photo profile" 
-                        src="images/profile_pic.png" 
-                        className={classes.avatar}>
+                        src="images/profile_pic.png">
                       </Avatar>            
                     }
+                    
                     title= {value.title}        
                   />
                   <CardMedia
@@ -155,10 +153,7 @@ function Home() {
                     >
                       {value.Likes.length}
                     </Typography>
-                    <Button 
-                      
-                      size="small"
-                      >
+                    <Button size="small">
                       <ChatBubbleOutlineIcon/>
                     </Button>
                   </CardActions>                  

@@ -103,7 +103,7 @@ function  CreatePost() {
                 <input
                   accept="image/*"
                   name="image"
-                  style={{ display: "none", }}
+                  style={{ display: "none" }}
                   id="contained-button-file"
                   multiple
                   type="file"
