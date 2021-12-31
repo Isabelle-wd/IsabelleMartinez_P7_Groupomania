@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import {Image} from "react-bootstrap";
+import {Image, Card} from "react-bootstrap";
 
 function Profile() {
   let { id } = useParams();
@@ -34,15 +34,19 @@ function Profile() {
   }, []);
 
    return (
-    <div className="profilePageContainer">
+    <div className="profilePageContainer mt-3 ml-2 d-flex justify-content-center">
+      <Card className="text-center pt-2" border="danger" style={{ width: "25rem" }}>
       <div className="basicInfo">
         {" "}
-        <Image src={user && user.image} rounded />
-        <h1> Pseudo: {user && user.username} </h1>
-        <h1> Email: {user && user.email} </h1>
-        <h1> Nom: {user && user.fullName} </h1>
-        <h1> Bio: {user && user.bio}</h1>
+        <Image src={user && user.image} alt="Photo de profil" width="150" height="150" rounded />
+        <Card.Header className="mt-2"> {user && user.fullName} </Card.Header>
+        <Card.Body>
+        <Card.Text> {user && user.username} </Card.Text>
+        <Card.Text> {user && user.email} </Card.Text>
+        <Card.Text> {user && user.bio} </Card.Text>
+        </Card.Body>
       </div>
+      </Card>
 
       <div className="listOfPosts">
         {listOfPosts.map((value, key) => {
