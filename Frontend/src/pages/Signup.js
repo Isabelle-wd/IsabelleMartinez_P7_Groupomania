@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik'; // Validation des formulaires
 import * as Yup from "yup"; // Validation des données du formulaire
 import axios from "axios";
+import Loading from "../components/Loading"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,36 +34,39 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+
 function Signup() {
-    const classes = useStyles();
+  const classes = useStyles();
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    const validationSchema = Yup.object().shape({
-        email: Yup
-          .string()
-          .email("Adresse email non valide")
-          .required(),
-        username: Yup
-          .string()
-          .min(3)
-          .max(25)
-          .required(),
-        password: Yup
-          .string()
-          .matches(
-            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
-          )
-          .required(), 
-        fullName: Yup
-          .string()
-          .max(25),
-        bio: Yup
-          .string()
-          .max(200),
-        image: Yup
-          .mixed(),
-    });
-
+  function onChangeImage(e) {
+      setImage(e.target.files[0])
+  }
     
+  const validationSchema = Yup.object().shape({
+    email: Yup
+      .string()
+      .email("Adresse email non valide")
+      .required(),
+    username: Yup
+      .string()
+      .min(3)
+      .max(25)
+      .required(),
+    password: Yup
+      .string()
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+      )
+      .required(), 
+    fullName: Yup
+      .string()
+      .max(25),
+    bio: Yup
+      .string()
+      .max(200),        
+    });
 
     let history = useHistory();
 
@@ -72,18 +76,40 @@ function Signup() {
             username: "",
             password: "",
             fullName: "",
-            bio: "",
-            image: ""
+            bio: "",           
         },         
         validationSchema: validationSchema,
-        onSubmit: (data) => {
-            axios.post("http://localhost:3001/auth", data)
+        onSubmit: (values) => {
+          setLoading(true);
+          let formData = new FormData();
+          if (image) formData.append("image", image); 
+          formData.append("email", values.email);
+          formData.append("username", values.username);
+          formData.append("fullName", values.fullName);
+          formData.append("password", values.password);
+          formData.append("bio", values.bio);
+          axios
+            .post("http://localhost:3001/auth", formData, {
+              headers: { 
+                "content-type": "multipart/form-data",
+                Authorization: "Bearer " + localStorage.getItem("accessToken") },
+            })
             .then(() => {
-                history.push("/");
+                history.push("/login")
+            .catch((error) => {
+              console.log(error)
+            })
+            .finally(()=>{
+              setLoading(false)
+          });
         })},
     });
 
     return (
+      <>
+      { loading ?
+      <Loading />         
+            :
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper} onSubmit={formik.handleSubmit}>
@@ -164,18 +190,16 @@ function Signup() {
                 />
               </Grid>      
               <Grid item xs={12}>
-              <div>
-              <label htmlFor="image">Photo de profile :</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  name="image"
-                  onChange={formik.handleChange}
-                  value={formik.values.image}
-                  id="image"                
-                />
-                
-              </div>
+                <div>
+                  <label htmlFor="image">Photo de profile :</label>
+                    <input
+                      id="image" 
+                      type="file"
+                      accept="image/*"
+                      name="image"
+                      onChange={onChangeImage}                
+                    />
+                </div>
               </Grid>      
             </Grid>
             <Button
@@ -188,8 +212,8 @@ function Signup() {
           !formik.values.fullName ||
           !formik.values.username ||
           !formik.values.email ||
-          !formik.values.bio ||
-          !formik.values.image
+          !formik.values.bio
+          
         }
       >
         Je m'inscrit
@@ -197,6 +221,8 @@ function Signup() {
           </form>
         </div>     
       </Container>
+          }
+          </>
     )
 }
 export default Signup;

@@ -4,13 +4,14 @@ const { Users } = require("../models");
 const bcrypt = require ("bcrypt");
 const { sign } = require("jsonwebtoken");
 const auth = require("../middleware/auth");
+const multer = require("../middleware/multer-config")
 require("dotenv").config();
 
 
 // Inscription 
-router.post("/", async (req, res) => {
+router.post("/", multer, async (req, res) => {
     try {
-        const { email, username, password, fullName, bio, image } = req.body;
+        const { email, username, password, fullName, bio } = req.body;
         let hash = await bcrypt.hash(password, 10);
         Users.create ({
             email: email,
@@ -18,7 +19,7 @@ router.post("/", async (req, res) => {
             password: hash,
             fullName: fullName,
             bio: bio,
-            image: image
+            image: req.file? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`: ""
         });
         res.json("SUCCESS");
     } catch (error) { 
