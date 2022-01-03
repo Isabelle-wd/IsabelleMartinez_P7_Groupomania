@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import {Image, Card} from "react-bootstrap";
+import {Image, Card, Button, ButtonToolbar} from "react-bootstrap";
 
 function Profile() {
   let { id } = useParams();
@@ -36,16 +36,26 @@ function Profile() {
    return (
     <div className="profilePageContainer mt-3 ml-2 d-flex justify-content-center">
       <Card className="text-center pt-2" border="danger" style={{ width: "25rem" }}>
-      <div className="basicInfo">
-        {" "}
-        <Image src={user && user.image} alt="Photo de profil" width="150" height="150" rounded />
-        <Card.Header className="mt-2"> {user && user.fullName} </Card.Header>
-        <Card.Body>
-        <Card.Text> {user && user.username} </Card.Text>
-        <Card.Text> {user && user.email} </Card.Text>
-        <Card.Text> {user && user.bio} </Card.Text>
-        </Card.Body>
-      </div>
+        <div className="basicInfo">
+          {" "}
+          <Image src={user && user.image} alt="Photo de profil" width="150" height="150" rounded />
+          <Card.Title className="mt-2"> {user && user.fullName} </Card.Title>
+          <Card.Body>
+            <Card.Text> {user && user.username} </Card.Text>
+            <Card.Text> {user && user.email} </Card.Text>
+            <Card.Text> {user && user.bio} </Card.Text>
+            <ButtonToolbar className="justify-content-between mt-5">
+              <Button 
+                variant="primary" 
+                size="sm"
+                >Modifier</Button>
+              <Button 
+                variant="danger" 
+                size="sm" 
+                >Supprimer</Button>
+            </ButtonToolbar>
+          </Card.Body>
+        </div>
       </Card>
 
       <div className="listOfPosts">

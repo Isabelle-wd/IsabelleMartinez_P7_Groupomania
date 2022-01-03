@@ -65,7 +65,7 @@ function Signup() {
       .max(25),
     bio: Yup
       .string()
-      .max(200),        
+      .max(500),        
     });
 
     let history = useHistory();
