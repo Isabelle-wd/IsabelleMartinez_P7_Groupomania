@@ -100,6 +100,16 @@ function  CreatePost() {
                 error={contentError}             
               />
               <div>
+                  <label htmlFor="image">Télécharger une image :</label>
+                    <input
+                      id="image" 
+                      type="file"
+                      accept="image/*"
+                      name="image"
+                                      
+                    />
+                </div>
+              {/* <div>
                 <input
                   accept="image/*"
                   name="image"
@@ -116,7 +126,7 @@ function  CreatePost() {
                     <PhotoCamera fontSize="large" />
                   </IconButton>
                 </label>
-              </div>
+              </div> */}
               <Button 
                 type="submit"
                 variant="contained"
