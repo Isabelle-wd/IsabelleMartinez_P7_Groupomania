@@ -95,7 +95,7 @@ function Signup() {
                 Authorization: "Bearer " + localStorage.getItem("accessToken") },
             })
             .then(() => {
-                history.push("/login")
+              history.push("/login")
             .catch((error) => {
               console.log(error)
             })

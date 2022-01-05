@@ -66,17 +66,14 @@ router.get("/auth", auth, (req, res) => {
     res.json(req.user);
 });
 
-                        // Profil
-
-//Afficher
+//Afficher profil
 router.get("/basicinfo", auth, async (req, res) => { 
     res.json(req.user);
-  });
+});
 
-//Supprimer
+//Supprimer profil
 router.delete("/basicinfo/:id", auth, async (req, res) => {
-    const { id } = req.params;
-  
+    const { id } = req.params;  
     Users.destroy({
       where: { id: id }
     })

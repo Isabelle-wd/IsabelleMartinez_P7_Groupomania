@@ -61,7 +61,7 @@ let history = useHistory();
               status: true,
             });
             localStorage.setItem("userId", response.data.id);
-            history.push("/");  
+            history.push("/basicinfo/:id");  
           }       
                           
         });

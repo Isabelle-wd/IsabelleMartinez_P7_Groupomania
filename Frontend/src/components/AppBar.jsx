@@ -1,6 +1,6 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
-//import { BrowserRouter as Router } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
 import {Container, Navbar, Nav} from "react-bootstrap";
 import Avatar from "@material-ui/core/Avatar";
@@ -13,6 +13,27 @@ function AppBar() {
       id: 0, 
       status: false,
     });
+   
+    const location = useLocation();
+
+    React.useEffect(() => {
+      axios.get(
+        "http://localhost:3001/auth/auth", {
+            headers: { Authorization: "Bearer " + localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            setAuthState({ ...authState, status: false });
+          } else {
+            setAuthState({
+              username: response.data.username,
+              id: response.data.id,
+              status: true,
+            });
+          }
+        });
+    }, [location]);
 
       useEffect(() => {
         axios.get(

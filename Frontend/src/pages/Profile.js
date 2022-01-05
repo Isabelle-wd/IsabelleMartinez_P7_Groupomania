@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import {Image, Card, Button, ButtonToolbar} from "react-bootstrap";
+import {Image, Card, Button} from "react-bootstrap";
 
 function Profile() {
-  let { id } = useParams();
+  
   let history = useHistory();
   const [user, setUser] = useState("");
-  const [listOfPosts, setListOfPosts] = useState([]);
 
   useEffect(() => {
     axios
@@ -21,15 +20,7 @@ function Profile() {
         console.error(error);
       });
 
-    axios.get(`http://localhost:3001/posts/getUserPosts/${id}`, {        
-      headers: { Authorization: "Bearer" + localStorage.getItem("accessToken") }
-    })
-      .then((response) => {
-        setListOfPosts(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    
     // eslint-disable-next-line
   }, []);
 
@@ -45,6 +36,38 @@ function Profile() {
         });
   };
 
+/*   //Update user
+exports.updateUser = (req, res) => {
+  const { id } = req.params
+
+  if (req.file) {
+    req.body.image = `${req.protocol}://${req.get('host')}/images/${
+      req.file.filename
+    }`
+  }
+  Users.findOne({ where: { id: id } })
+    .then(() => {
+      Users.update(req.body, {
+        where: { id: id }
+      })
+        .then(num => {
+          if (num == 1) {
+            // à enlever et voir
+            res.status(200).send({ message: 'Utilisateur modifié avec succès' })
+          } else {
+            res.send({
+              message: `Impossible de mofifier cet utilisateur n°${id}. Peut-être que cet utilisateur n'a pas été trouvé dans la BDD.`
+            })
+          }
+        })
+        .catch(error =>
+          res
+            .status(500)
+            .send({ message: error || 'Impossible de modifier cet utilisateur' })
+        )
+    })
+    .catch(error => res.send(error))
+} */
 
    return (
     <div className="profilePageContainer mt-3 ml-2 d-flex justify-content-center">
@@ -57,11 +80,7 @@ function Profile() {
             <Card.Text> {user && user.username} </Card.Text>
             <Card.Text> {user && user.email} </Card.Text>
             <Card.Text> {user && user.bio} </Card.Text>
-            <ButtonToolbar className="justify-content-between mt-5">
-              <Button 
-                variant="primary" 
-                size="sm"
-                >Modifier</Button>
+            
               <Button 
                 onClick={() => {
                   deleteProfile(user.id);
@@ -69,34 +88,10 @@ function Profile() {
                 variant="danger" 
                 size="sm" 
                 >Supprimer</Button>
-            </ButtonToolbar>
+            
           </Card.Body>
         </div>
       </Card>
-
-      <div className="listOfPosts">
-        {listOfPosts.map((value, key) => {
-          return (
-            <div key={key} className="post">
-              <div className="title"> {value.title} </div>
-              <div
-                className="body"
-                onClick={() => {
-                  history.push(`/post/${value.id}`);
-                }}
-              >
-                {value.postText}
-              </div>
-              <div className="footer">
-                <div className="username">{value.username}</div>
-                <div className="buttons">
-                  <label> {value.Likes.length}</label>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }
