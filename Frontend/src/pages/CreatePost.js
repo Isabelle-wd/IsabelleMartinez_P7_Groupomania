@@ -1,8 +1,7 @@
 import React, { useEffect, useState} from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { Button, TextField, makeStyles, Container, IconButton, Typography} from "@material-ui/core";
-import { PhotoCamera } from "@material-ui/icons";
+import { Button, TextField, makeStyles, Container, Typography} from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 
 

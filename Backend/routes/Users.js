@@ -66,12 +66,29 @@ router.get("/auth", auth, (req, res) => {
     res.json(req.user);
 });
 
-// Profile
-router.get("/basicinfo", auth, async (req, res) => {
-    
-  
-  
+                        // Profil
+
+//Afficher
+router.get("/basicinfo", auth, async (req, res) => { 
     res.json(req.user);
   });
+
+//Supprimer
+router.delete("/basicinfo/:id", auth, async (req, res) => {
+    const { id } = req.params;
+  
+    Users.destroy({
+      where: { id: id }
+    })
+      .then(res => {
+        res.send({
+          message: "Utilisateur supprimé"
+        })
+      })
+      .catch(error =>
+        res
+          .send({ message: "Impossible de supprimer cet utilisateur ", error: error.message })
+      )
+});
 
 module.exports = router;

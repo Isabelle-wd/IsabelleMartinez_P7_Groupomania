@@ -203,21 +203,20 @@ function Signup() {
               </Grid>      
             </Grid>
             <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        disabled={
-          !formik.values.fullName ||
-          !formik.values.username ||
-          !formik.values.email ||
-          !formik.values.bio
-          
-        }
-      >
-        Je m'inscrit
-      </Button>               
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              disabled={
+                !formik.values.fullName ||
+                !formik.values.username ||
+                !formik.values.email ||
+                !formik.values.bio         
+              }
+            >
+              Je m'inscrit
+            </Button>               
           </form>
         </div>     
       </Container>

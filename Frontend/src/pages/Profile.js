@@ -22,7 +22,7 @@ function Profile() {
       });
 
     axios.get(`http://localhost:3001/posts/getUserPosts/${id}`, {        
-      headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
+      headers: { Authorization: "Bearer" + localStorage.getItem("accessToken") }
     })
       .then((response) => {
         setListOfPosts(response.data);
@@ -32,6 +32,19 @@ function Profile() {
       });
     // eslint-disable-next-line
   }, []);
+
+  const deleteProfile = (id) => {
+    axios
+      .delete(`http://localhost:3001/auth/basicinfo/${id}`, 
+        {        
+          headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") },
+        })
+      .then(() => 
+        {
+          history.push("/");
+        });
+  };
+
 
    return (
     <div className="profilePageContainer mt-3 ml-2 d-flex justify-content-center">
@@ -50,6 +63,9 @@ function Profile() {
                 size="sm"
                 >Modifier</Button>
               <Button 
+                onClick={() => {
+                  deleteProfile(user.id);
+                }}
                 variant="danger" 
                 size="sm" 
                 >Supprimer</Button>
