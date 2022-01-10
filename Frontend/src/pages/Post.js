@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import axios from "axios"; // Facilite les requêtes API
 /* import { AuthContext } from "../helpers/AuthContext"; */
 import {Card, Container, Form, Button} from "react-bootstrap";
+import CardActions from "@material-ui/core/CardActions";
 import { DeleteOutlined } from "@material-ui/icons";
 
 function Post() {
@@ -101,21 +102,21 @@ function Post() {
               <Card.Body>
                 <Card.Title as="h6">{postObject.title}</Card.Title> 
                 <Card.Text>{postObject.content}</Card.Text>
-                <Card.Footer>                                       
+                <CardActions>                                       
                              
-               {postObject.UserId}       
+                         
                   {userId === postObject.UserId && (
-                  <button 
+                  <Button 
                     className="btn btn-default btn-lg"
                     onClick={() => {
                       deletePost(postObject.id);
                     }}
                   >
                     {" "}
-                    <DeleteOutlined fontSize="small" />
-                  </button> 
+                    <DeleteOutlined/>
+                  </Button> 
                   )}
-                </Card.Footer>
+                </CardActions>
               </Card.Body>               
             </Card>
           </Container>

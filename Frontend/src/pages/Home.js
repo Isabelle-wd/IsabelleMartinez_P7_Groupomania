@@ -22,9 +22,8 @@ import Grid from "@material-ui/core/Grid";
 
 
 const useStyles = makeStyles((theme) => ({
-  
   media: {
-    height: "100%",
+    
     paddingTop: "56.25%",
   }, 
 }));
@@ -99,7 +98,7 @@ function Home() {
       })
 
   return (  
-    <Container>
+    <Container className="mt-5">
       { isLoading === true?
       <Loading />
         :
@@ -108,7 +107,8 @@ function Home() {
             ? listOfPosts.map((value, key) => {
             return (
               <Grid item xs={12} key={key}>
-                <Card         
+                <Card       
+                  className={classes.card}  
                   onClick={() => {
                     history.push(`/post/${value.id}`)
                   }}                             
@@ -119,8 +119,7 @@ function Home() {
                         alt="photo profile" 
                         src="images/profile_pic.png">
                       </Avatar>            
-                    }
-                    
+                    }                   
                     title= {value.title}        
                   />
                   <CardMedia
@@ -129,7 +128,7 @@ function Home() {
                   />
                   <CardContent>
                     <Typography 
-                      variant="body2" 
+                      variant="body4" 
                       color="textSecondary" 
                       component="p"
                     >
@@ -137,7 +136,11 @@ function Home() {
                     </Typography>
                   </CardContent>
                   <CardActions 
-                    spacing={8}>
+                    className= "justify-content-between"
+                    spacing={8}>                   
+                    <Button size="small">
+                      <ChatBubbleOutlineIcon/>
+                    </Button>
                     <IconButton 
             		      aria-label="add to favorites"
             		      onClick={() => {
@@ -145,17 +148,15 @@ function Home() {
                       }}
                     >
                       <FavoriteIcon />
-                    </IconButton>
-                    <Typography 
+                      <Typography 
                       variant="body2" 
                       color="textSecondary" 
                       component="p"
                     >
                       {value.Likes.length}
                     </Typography>
-                    <Button size="small">
-                      <ChatBubbleOutlineIcon/>
-                    </Button>
+                    </IconButton>
+                    
                   </CardActions>                  
                 </Card>
               </Grid>
